@@ -46,6 +46,7 @@ typings/
 
 # TypeScript cache
 *.tsbuildinfo
+<<<<<<< HEAD
 
 # Optional npm cache directory
 .npm
@@ -105,3 +106,6 @@ dist
 
 # IDE
 .idea/
+
+# next env
+next-env.d.ts
