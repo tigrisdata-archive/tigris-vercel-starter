@@ -46,7 +46,6 @@ typings/
 
 # TypeScript cache
 *.tsbuildinfo
-<<<<<<< HEAD
 
 # Optional npm cache directory
 .npm
@@ -70,7 +69,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-.env
+.env.local
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
