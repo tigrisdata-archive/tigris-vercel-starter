@@ -3,19 +3,19 @@ import tigris from '../tigris';
 import { Collection } from '@tigrisdata/core'
 import { TaskList } from '../task-list'
 
-export interface TaskListSchema extends TigrisCollectionType {
+export interface TaskListDoc extends TigrisCollectionType {
   id?: number;
   name: string;
   tags: string;
   items: string;
 }
 
-const DB_NAME = "starter";
-const COLLECTION_NAME = "taskLists";
+export const DB_NAME = "helloTigris";
+export const COLLECTION_NAME = "taskLists";
 const SEPARATOR = ", ";
 
 export async function getAllLists(): Promise<Array<TaskList>> {
-  const collection: Collection<TaskListSchema> = tigris.getDatabase(DB_NAME).getCollection(COLLECTION_NAME);
+  const collection: Collection<TaskListDoc> = tigris.getDatabase(DB_NAME).getCollection(COLLECTION_NAME);
   const cursor = collection.findMany();
   const results: Array<TaskList> = new Array<TaskList>();
   for await (const list of cursor) {
@@ -25,7 +25,7 @@ export async function getAllLists(): Promise<Array<TaskList>> {
   return Promise.resolve(results);
 }
 
-function unMarshal(input: TaskListSchema): TaskList {
+function unMarshal(input: TaskListDoc): TaskList {
   return {
     id: input.id as number,
     name: input.name,
@@ -34,7 +34,7 @@ function unMarshal(input: TaskListSchema): TaskList {
   }
 }
 
-function marshal(input: TaskList): TaskListSchema {
+function marshal(input: TaskList): TaskListDoc {
   return {
     id: input.id,
     name: input.name,
