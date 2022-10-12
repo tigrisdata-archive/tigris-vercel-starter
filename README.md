@@ -7,3 +7,5 @@ $> npm install
 $> npm run setup # Optional: assumes you have tigris running, will create schema and sample data
 $> npm run dev
 ```
+
+Go to `localhost:3000` on browser
