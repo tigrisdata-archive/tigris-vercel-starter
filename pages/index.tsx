@@ -18,8 +18,8 @@ const Home: NextPage = () => {
         </h1>
 
         <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.tsx</code>
+          Start using by navigating to{' '}
+          <code className={styles.code}>Todo app</code>
         </p>
 
         <div className={styles.grid}>
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
             <p>Find in-depth information about Tigris features and API.</p>
           </a>
 
-          <a href="https://nextjs.org/learn" className={styles.card}>
+          <a href="/api/lists" className={styles.card}>
             <h2>Todo app &rarr;</h2>
             <p>Learn about Next.js in an interactive course with quizzes!</p>
           </a>
