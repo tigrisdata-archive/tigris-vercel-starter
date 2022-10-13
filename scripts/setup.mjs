@@ -7,7 +7,7 @@ dotenv.config({ path: '.env.local' })
 const inputUrl = process.env.TIGRIS_URI
 console.log(`Bootstrapping database and collection at ${inputUrl}....`)
 
-const DB_NAME = 'helloTigris'
+const DB_NAME = 'tigris_vercel_starter'
 const COLLECTION_NAME = 'todoItems'
 const tigris = new Tigris({ serverUrl: inputUrl, insecureChannel: true })
 
