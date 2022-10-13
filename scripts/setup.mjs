@@ -2,53 +2,51 @@ import { TigrisDataTypes } from '@tigrisdata/core/dist/types.js'
 import { Tigris } from '@tigrisdata/core'
 import dotenv from 'dotenv'
 
-dotenv.config({ path: '.env.local'});
-const inputUrl = process.env.TIGRIS_HOST;
+// TODO: Add error handling
+dotenv.config({ path: '.env.local' })
+const inputUrl = process.env.TIGRIS_HOST
 console.log(`Bootstrapping database and collection at ${inputUrl}....`)
 
-const DB_NAME = "helloTigris";
-const COLLECTION_NAME = "taskLists";
-const tigris = new Tigris({ serverUrl: inputUrl, insecureChannel: true });
+const DB_NAME = 'helloTigris'
+const COLLECTION_NAME = 'todoItems'
+const tigris = new Tigris({ serverUrl: inputUrl, insecureChannel: true })
 
 // setup db
-const db = await tigris.createDatabaseIfNotExists(DB_NAME);
+const db = await tigris.createDatabaseIfNotExists(DB_NAME)
 console.log(`Created database: ${DB_NAME}`)
 
 // schema definition
-const taskListSchema = {
+const todoItemSchema = {
   id: {
     type: TigrisDataTypes.INT32,
-    primary_key: {order: 1, autoGenerate: true}
+    primary_key: { order: 1, autoGenerate: true }
   },
-  name: {type: TigrisDataTypes.STRING},
-  items: {type: TigrisDataTypes.STRING},
-  tags: {type: TigrisDataTypes.STRING},
-};
+  text: { type: TigrisDataTypes.STRING },
+  completed: { type: TigrisDataTypes.BOOLEAN },
+}
 
 // create collection
-const collection = await db.createOrUpdateCollection(COLLECTION_NAME, taskListSchema);
+const collection = await db.createOrUpdateCollection(COLLECTION_NAME,
+  todoItemSchema)
 console.log(`Created collection: ${COLLECTION_NAME}`)
 
 export const documents = [
   {
     id: 1,
-    name: "Grocery list 10/12",
-    items: "bread, pasta, cereal, coffee",
-    tags: "shopping, money"
+    text: 'Bread',
+    completed: false
   },
   {
     id: 2,
-    name: "School supplies",
-    items: "paint kit, marker, index cards, notebooks, colored pencils, scissors",
-    tags: "shopping, kids"
+    text: 'Pasta',
+    completed: false
   },
   {
     id: 3,
-    name: "Spring cleaning",
-    items: "backyard trim, replace bulbs, sweep porch, fix microwave",
-    tags: "household"
+    text: 'Cereal',
+    completed: false
   }
-];
+]
 // insert documents
-const inserted = await collection.insertMany(documents);
-console.log(`Inserted ${inserted.length} documents`);
+const inserted = await collection.insertMany(documents)
+console.log(`Inserted ${inserted.length} documents`)

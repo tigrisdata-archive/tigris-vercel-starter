@@ -28,7 +28,7 @@ const Home: NextPage = () => {
             <p>Find in-depth information about Tigris features and API.</p>
           </a>
 
-          <a href="/api/lists" className={styles.card}>
+          <a href="/api/items" className={styles.card}>
             <h2>Todo app &rarr;</h2>
             <p>Learn about Next.js in an interactive course with quizzes!</p>
           </a>

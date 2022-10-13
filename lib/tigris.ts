@@ -6,7 +6,7 @@ if (!process.env.TIGRIS_HOST) {
 
 let tigris: Tigris
 const tigrisHost: string = process.env.TIGRIS_HOST as string
-const clientConfig: TigrisClientConfig = getClientConfig(tigrisHost);
+const clientConfig: TigrisClientConfig = getClientConfig(tigrisHost)
 
 function getClientConfig (inputUrl: string): TigrisClientConfig {
   const noAuthRequired: boolean = inputUrl == null ||
@@ -19,7 +19,7 @@ function getClientConfig (inputUrl: string): TigrisClientConfig {
   if (noAuthRequired) {
     return { serverUrl: inputUrl, insecureChannel: true }
   } else {
-    throw new Error('auth setup not implemented');
+    throw new Error('auth setup not implemented')
   }
 }
 
@@ -29,10 +29,10 @@ declare global {
 
 // TigrisClient can be global to re-use connections in development
 if (process.env.NODE_ENV === 'production') {
-  tigris = new Tigris(clientConfig);
+  tigris = new Tigris(clientConfig)
 } else {
   if (!global.tigrisClient) {
-    global.tigrisClient = new Tigris(clientConfig);
+    global.tigrisClient = new Tigris(clientConfig)
   }
   tigris = global.tigrisClient
 }
