@@ -3,7 +3,7 @@ import tigris from './tigris'
 import { Collection } from '@tigrisdata/core'
 import { TodoItem } from './schema'
 
-export const DB_NAME = 'helloTigris'
+export const DB_NAME = 'tigris_vercel_starter'
 export const COLLECTION_NAME = 'todoItems'
 
 // TODO: Add error handling
