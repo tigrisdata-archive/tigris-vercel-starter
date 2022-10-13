@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 
 const Home: NextPage = () => {
   return (
@@ -28,10 +29,11 @@ const Home: NextPage = () => {
             <p>Find in-depth information about Tigris features and API.</p>
           </a>
 
-          <a href="/api/items" className={styles.card}>
-            <h2>Todo app &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
+          <Link href="/api/items">
+            <a className={styles.card}><h2>Todo app &rarr;</h2>
+              <p>Learn about Next.js in an interactive course with quizzes!</p>
+            </a>
+          </Link>
 
           <a
             href="https://github.com/vercel/next.js/tree/canary/examples"
