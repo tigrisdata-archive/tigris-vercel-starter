@@ -1,74 +1,70 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
-import Image from 'next/image'
+import React, { useEffect, useState } from 'react'
+import EachTodo from '../components/LoaderWave/EachToDo'
+import LoaderWave from '../components/LoaderWave/LoaderWave'
+import { TodoItem } from '../lib/schema'
 import styles from '../styles/Home.module.css'
-import Link from 'next/link'
 
 const Home: NextPage = () => {
+
+  const [todoList, setTodoList] = useState<TodoItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+
+  useEffect(()=>{
+
+    setIsLoading(true);
+    fetch("/api/items")
+    .then(response => response.json())
+    .then(data => 
+      {
+        setTodoList(data.result)
+        setIsLoading(false)
+      }
+    );
+
+  },[]);
+
+  
   return (
-    <div className={styles.container}>
+    <div>
       <Head>
-        <title>Create Tigris App using Next JS</title>
+        <title>Todo App using Next.JS + Tigris</title>
         <meta name="description" content="Tigris app tutorial" />
-        <link rel="icon" href="/favicon.ico" />
       </Head>
+      
+      <div className={styles.container}>
+        
+        <h2>Sample Todo app using Next.JS and Tigris</h2>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          <a href="https://tigrisdata.com">Tigris</a> tutorial!
-        </h1>
-
-        <p className={styles.description}>
-          Start using by navigating to{' '}
-          <code className={styles.code}>Todo app</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://docs.tigrisdata.com/overview/" className={styles.card}>
-            <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Tigris features and API.</p>
-          </a>
-
-          <Link href="/api/items/">
-            <a className={styles.card}><h2>Todo app &rarr;</h2>
-              <p>Learn about Next.js in an interactive course with quizzes!</p>
-            </a>
-          </Link>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className={styles.card}
-          >
-            <h2>Examples &rarr;</h2>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h2>Deploy &rarr;</h2>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        {/* Search Header */}
+        <div className={styles.searchHeader}>
+          <input className={styles.searchInput} placeholder='Type an item to add or search'/>
+          <button>Add</button>
+          <button>Search</button>
         </div>
-      </main>
 
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
+        {/* Results section */}
+        <div className={styles.results}>
+          { isLoading ? (
+            <LoaderWave/>
+            ) : 
+            ( 
+            <ul>
+              { todoList.map((each)=>{
+                return(<EachTodo key={each.id} text={each.text} isCompleted={each.completed}/>)
+              })}
+            </ul> 
+            )
+          }
+        </div>
+
+      </div>
+       
     </div>
   )
 }
 
 export default Home
+ 
