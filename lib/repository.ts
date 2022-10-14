@@ -29,20 +29,16 @@ export async function insertItem (item: TodoItem): Promise<TodoItem> {
   return collection.insertOne(item)
 }
 
-export async function updateItem (item: TodoItem) {
-
-}
-
-export async function markCompleted (itemId: number) {
-
-}
-
-export async function markActive (itemId: number) {
-
+export async function updateItem (item: TodoItem): Promise<TodoItem> {
+  const db = tigris.getDatabase(DB_NAME)
+  const collection: Collection<TodoItem> = db.getCollection(COLLECTION_NAME)
+  return collection.insertOrReplaceOne(item);
 }
 
 export async function deleteItem (itemId: number) {
-
+  const db = tigris.getDatabase(DB_NAME)
+  const collection: Collection<TodoItem> = db.getCollection(COLLECTION_NAME)
+  return collection.deleteOne({id: itemId});
 }
 
 export async function searchItems (query: string): Promise<SearchResult<TodoItem>> {

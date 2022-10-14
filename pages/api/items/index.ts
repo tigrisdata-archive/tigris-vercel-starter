@@ -42,8 +42,9 @@ async function handleGet (req: NextApiRequest,
 async function handlePost (req: NextApiRequest,
   res: NextApiResponse<Response>) {
   try {
-    const item = await insertItem(req.body)
-    res.status(200).json({ result: [item] })
+    const item = req.body as TodoItem
+    const inserted = await insertItem(item)
+    res.status(200).json({ result: [inserted] })
   } catch (err) {
     const error = err as Error
     res.status(500).json({ error: error.message })
