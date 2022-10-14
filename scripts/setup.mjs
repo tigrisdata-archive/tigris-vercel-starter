@@ -3,7 +3,7 @@ import { Tigris } from '@tigrisdata/core'
 import dotenv from 'dotenv'
 
 // TODO: Add error handling and use prod/dev configs
-dotenv.config({ path: '.env.local' })
+dotenv.config({ path: '.env.development.local' })
 const inputUrl = process.env.TIGRIS_URI
 console.log(`Bootstrapping database and collection at ${inputUrl}....`)
 
