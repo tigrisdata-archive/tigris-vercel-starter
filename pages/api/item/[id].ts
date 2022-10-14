@@ -14,16 +14,16 @@ export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) {
-  const { itemId } = req.query
+  const { id } = req.query
   switch (req.method) {
     case 'GET':
-      await handleGet(req, res, Number(itemId))
+      await handleGet(req, res, Number(id))
       break
     case 'PUT':
       await handlePut(req, res)
       break
     case 'DELETE':
-      await handleDelete(req, res, Number(itemId))
+      await handleDelete(req, res, Number(id))
       break
     default:
       res.setHeader('Allow', ['GET', 'PUT', 'DELETE'])
