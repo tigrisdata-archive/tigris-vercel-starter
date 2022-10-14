@@ -39,7 +39,7 @@ async function handleGet (
   try {
     const item = await getItem(itemId)
     if (!item) {
-      res.status(404)
+      res.status(404).end(`No item found`)
     } else {
       res.status(200).json({ result: item })
     }
@@ -71,9 +71,9 @@ async function handleDelete (
   try {
     const status = (await deleteItem(itemId)).status
     if (status === 'deleted') {
-      res.status(200)
+      res.status(200).end()
     } else {
-      res.status(400)
+      res.status(500).json({error: `Failed to delete ${itemId}`})
     }
   } catch (err) {
     const error = err as Error
