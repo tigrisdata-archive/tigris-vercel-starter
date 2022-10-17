@@ -1,6 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { TodoItem } from '../../../lib/schema'
-import { searchItems } from '../../../lib/repository'
+import { SearchRequest } from '@tigrisdata/core/dist/search/types'
+import { Collection } from '@tigrisdata/core'
+import tigrisDb, { COLLECTION_NAME } from '../../../lib/tigris'
 
 type Data = {
   result?: Array<TodoItem>,
@@ -14,11 +16,13 @@ export default async function handler (
 ) {
   const query = req.query['q']
   if (query === undefined) {
-    res.status(400).json({ error: "No search query found in request" })
+    res.status(400).json({ error: 'No search query found in request' })
     return
   }
   try {
-    const searchResult = await searchItems(query as string)
+    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const searchRequest: SearchRequest<TodoItem> = { q: query as string }
+    const searchResult = await collection.search(searchRequest)
     const items = new Array<TodoItem>()
     for (const hit of searchResult.hits) {
       items.push(hit.document)

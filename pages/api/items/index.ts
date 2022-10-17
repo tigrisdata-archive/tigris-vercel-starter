@@ -1,6 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { getAllItems, insertItem } from '../../../lib/repository'
 import { TodoItem } from '../../../lib/schema'
+import { Collection } from '@tigrisdata/core'
+import tigrisDb, { COLLECTION_NAME } from '../../../lib/tigris'
+import { ReadRequestOptions } from '@tigrisdata/core/dist/types'
 
 type Response = {
   result?: Array<TodoItem>,
@@ -29,9 +31,14 @@ export default async function handler (
 async function handleGet (req: NextApiRequest,
   res: NextApiResponse<Response>) {
   try {
-    const limit = Number(req.query["limit"]) || 20
-    const skip = Number(req.query["skip"]) || 0
-    const items = await getAllItems(limit, skip)
+    const limit = Number(req.query['limit']) || 20
+    const skip = Number(req.query['skip']) || 0
+
+    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const options = new ReadRequestOptions(limit, skip)
+    const cursor = collection.findMany(undefined, undefined, undefined,
+      options)
+    const items = await cursor.toArray()
     res.status(200).json({ result: items })
   } catch (err) {
     const error = err as Error
@@ -43,7 +50,8 @@ async function handlePost (req: NextApiRequest,
   res: NextApiResponse<Response>) {
   try {
     const item = req.body as TodoItem
-    const inserted = await insertItem(item)
+    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const inserted = await collection.insertOne(item)
     res.status(200).json({ result: [inserted] })
   } catch (err) {
     const error = err as Error

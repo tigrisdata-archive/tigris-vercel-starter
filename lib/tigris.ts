@@ -1,4 +1,4 @@
-import { Tigris, TigrisClientConfig } from '@tigrisdata/core'
+import { DB, Tigris, TigrisClientConfig } from '@tigrisdata/core'
 
 if (!process.env.TIGRIS_URI) {
   throw new Error('TIGRIS_URI env variable is missing in .env.local ')
@@ -7,10 +7,11 @@ if (!process.env.TIGRIS_URI) {
 const tigrisUri: string = process.env.TIGRIS_URI as string
 
 declare global {
-  var tigrisClient: Tigris
+  var tigrisDb: DB
 }
 
-let tigris: Tigris
+const DB_NAME = 'tigris_vercel_starter'
+let tigrisDb: DB
 let clientConfig: TigrisClientConfig
 
 if (process.env.NODE_ENV === 'production' || requiresAuth(tigrisUri)) {
@@ -31,16 +32,19 @@ if (process.env.NODE_ENV === 'production' || requiresAuth(tigrisUri)) {
 
 // TigrisClient can be global to re-use connections in development
 if (process.env.NODE_ENV === 'production') {
-  tigris = new Tigris(clientConfig)
+  const client = new Tigris(clientConfig)
+  tigrisDb = client.getDatabase(DB_NAME)
 } else {
-  if (!global.tigrisClient) {
-    global.tigrisClient = new Tigris(clientConfig)
+  if (!global.tigrisDb) {
+    const client = new Tigris(clientConfig)
+    global.tigrisDb = client.getDatabase(DB_NAME)
   }
-  tigris = global.tigrisClient
+  tigrisDb = global.tigrisDb
 }
 
-// export to share client across modules
-export default tigris
+// export to share database across modules
+export default tigrisDb
+export const COLLECTION_NAME = 'todoItems'
 
 function requiresAuth (inputUrl: string): boolean {
   const isLocalDev: boolean = inputUrl == null ||

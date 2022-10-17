@@ -1,6 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { deleteItem, getItem, updateItem } from '../../../lib/repository'
 import { TodoItem } from '../../../lib/schema'
+import { Collection } from '@tigrisdata/core'
+import tigrisDb, { COLLECTION_NAME } from '../../../lib/tigris'
 
 type Data = {
   result?: TodoItem,
@@ -37,7 +38,8 @@ async function handleGet (
   itemId: number
 ) {
   try {
-    const item = await getItem(itemId)
+    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const item = await collection.findOne({ id: itemId })
     if (!item) {
       res.status(404).end(`No item found`)
     } else {
@@ -55,7 +57,8 @@ async function handlePut (
 ) {
   try {
     const item = req.body as TodoItem
-    const updated = await updateItem(item)
+    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const updated = await collection.insertOrReplaceOne(item)
     res.status(200).json({ result: updated })
   } catch (err) {
     const error = err as Error
@@ -69,11 +72,12 @@ async function handleDelete (
   itemId: number
 ) {
   try {
-    const status = (await deleteItem(itemId)).status
+    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const status = (await collection.deleteOne({ id: itemId })).status
     if (status === 'deleted') {
       res.status(200).end()
     } else {
-      res.status(500).json({error: `Failed to delete ${itemId}`})
+      res.status(500).json({ error: `Failed to delete ${itemId}` })
     }
   } catch (err) {
     const error = err as Error
