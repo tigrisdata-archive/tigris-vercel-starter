@@ -1,10 +1,17 @@
 import { TigrisDataTypes } from '@tigrisdata/core/dist/types.js'
-import { Tigris } from '@tigrisdata/core'
 import dotenv from 'dotenv'
+import { Tigris } from '@tigrisdata/core'
 
-// TODO: Add error handling and use prod/dev configs
-dotenv.config({ path: '.env.development.local' })
+const conf = dotenv.config({ path: '.env.development' })
+if (conf.error) {
+  console.log(`Failed to load config file. Error: ${conf.error.message}`)
+  process.exit(1)
+}
 const inputUrl = process.env.TIGRIS_URI
+if (!inputUrl) {
+  console.log(`TIGRIS_URI is missing in config`)
+  process.exit(1)
+}
 console.log(`Bootstrapping database and collection at ${inputUrl}....`)
 
 const DB_NAME = 'tigris_vercel_starter'

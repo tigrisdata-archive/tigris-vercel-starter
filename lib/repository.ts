@@ -45,10 +45,5 @@ export async function searchItems (query: string): Promise<SearchResult<TodoItem
   const db = tigris.getDatabase(DB_NAME)
   const collection: Collection<TodoItem> = db.getCollection(COLLECTION_NAME)
   const request = { q: query }
-  const results = await collection.search(request)
-  //TODO: do not return undefined from TS client so whole op can be async
-  if (results) {
-    return Promise.resolve(results)
-  }
-  return Promise.reject()
+  return collection.search(request)
 }
