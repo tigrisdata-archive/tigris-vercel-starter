@@ -7,6 +7,7 @@ if (!process.env.TIGRIS_URI) {
 const tigrisUri: string = process.env.TIGRIS_URI as string
 
 declare global {
+   // eslint-disable-next-line no-var
   var tigrisDb: DB
 }
 

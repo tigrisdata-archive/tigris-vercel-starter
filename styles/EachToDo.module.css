@@ -1,0 +1,40 @@
+.each{
+    display:flex;
+    flex-direction:row;
+    border-bottom: 1px solid #dddddd;
+    
+}
+
+.eachButton{
+    background-color:transparent!important;
+    width:100%;
+    text-align: left;
+    vertical-align: middle;
+    padding: 0!important;
+}
+.eachButton:hover img{
+    content: url("/circle-checked.svg");
+}
+.eachButton:hover span{
+    text-decoration: line-through;    
+}
+
+.each span{
+    vertical-align: middle;
+    padding-left: 10px;
+    font-size: 14px;
+}
+
+.deleteBtn{
+    background-color:transparent!important;
+    text-align: center!important;
+    min-width:20px!important;  
+    padding: 10px!important;
+}
+
+.deleteBtn:hover,
+.deleteBtn:focus,
+.deleteBtn:active,
+.deleteBtn:focus-visible {
+    filter: brightness(0) saturate(100%) invert(98%) sepia(27%) saturate(4410%) hue-rotate(308deg) brightness(115%) contrast(98%);
+}
