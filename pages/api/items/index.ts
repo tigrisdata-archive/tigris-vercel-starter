@@ -49,7 +49,7 @@ async function handleGet (req: NextApiRequest,
 async function handlePost (req: NextApiRequest,
   res: NextApiResponse<Response>) {
   try {
-    const item = req.body as TodoItem
+    const item = JSON.parse(req.body) as TodoItem
     const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
     const inserted = await collection.insertOne(item)
     res.status(200).json({ result: [inserted] })

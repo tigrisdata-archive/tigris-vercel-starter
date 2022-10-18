@@ -10,21 +10,107 @@ const Home: NextPage = () => {
 
   const [todoList, setTodoList] = useState<TodoItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
+  //
+  const [querySearch, setQuerySearch] = useState('');
+  const [wiggleError, setWiggleError] = useState(false);
 
-  useEffect(()=>{
-
+  const fetchListItems = ()=>{
+    
     setIsLoading(true);
+    setIsError(false);
+
     fetch("/api/items")
     .then(response => response.json())
     .then(data => 
       {
-        setTodoList(data.result)
         setIsLoading(false)
+        if(data.result){  
+          setTodoList(data.result)
+        }
+        else {
+          setIsError(true)
+        }
       }
-    );
+    )
+    .catch(() => {
+      setIsLoading(false)
+      setIsError(true)
+    });
+  }
 
+
+  //Load the initial list of todo-items
+  useEffect(()=>{
+    fetchListItems()
   },[]);
+
+  
+  //Add a new todo-item
+  const addToDoItem = () => {
+    setWiggleError(false);
+
+    const result: RegExpMatchArray | null = querySearch.match('^\\S.*');
+    if(result == null){
+      setWiggleError(true);
+      return;
+    }
+
+    setIsLoading(true);
+
+    fetch("/api/items", {
+      method:'POST',
+      body:JSON.stringify({text:querySearch, completed:false})
+    })
+    .then(() => 
+      {
+        setIsLoading(false);
+        setQuerySearch('');
+        fetchListItems();
+      }
+    )
+
+  }
+
+
+  //Delete Todo-item
+  const deleteTodoItem = (id?:number) => {
+
+    setIsLoading(true);
+
+    fetch("/api/item/"+id, {
+      method:'DELETE',
+    })
+    .then(() => 
+      {
+        setIsLoading(false);
+        fetchListItems();
+      }
+    )
+
+  }
+
+
+  // Mark Todo-item
+  const updateTodoItem = (item:TodoItem) => {
+
+    item.completed = !item.completed;
+    setIsLoading(true);
+  
+    fetch("/api/item/"+item.id, {
+      method:'PUT',
+      body:JSON.stringify(item)
+    })
+    .then(() => 
+      {
+        setIsLoading(false);
+        fetchListItems();
+      }
+    )
+
+  }
+
 
   
   return (
@@ -40,24 +126,23 @@ const Home: NextPage = () => {
 
         {/* Search Header */}
         <div className={styles.searchHeader}>
-          <input className={styles.searchInput} placeholder='Type an item to add or search'/>
-          <button>Add</button>
-          <button>Search</button>
+          <input className={`${styles.searchInput} ${(wiggleError) ? styles.invalid : ''}`} value={querySearch} onChange={e=>{setWiggleError(false); setQuerySearch(e.target.value)}} placeholder='Type an item to add or search'/>
+          <button onClick={addToDoItem}>Add</button>
+          <button style={{pointerEvents:'none'}}>Search</button>
         </div>
 
         {/* Results section */}
         <div className={styles.results}>
-          { isLoading ? (
-            <LoaderWave/>
-            ) : 
-            ( 
-            <ul>
-              { todoList.map((each)=>{
-                return(<EachTodo key={each.id} text={each.text} isCompleted={each.completed}/>)
-              })}
-            </ul> 
-            )
-          }
+         
+          {isError && <p className={styles.errorText}>Something went wrong.. </p>}
+          {isLoading && <LoaderWave/>}
+
+          <ul>
+            { todoList.map((each)=>{
+              return(<EachTodo key={each.id} toDoItem={each} deleteHandler={deleteTodoItem} updateHandler={updateTodoItem}/>)
+            })}
+          </ul> 
+            
         </div>
 
       </div>

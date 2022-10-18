@@ -2,8 +2,9 @@
     display:flex;
     flex-direction:row;
     border-bottom: 1px solid #dddddd;
-    
+    padding:10px 25px;
 }
+.each:last-child { border-bottom: none; }
 
 .eachButton{
     background-color:transparent!important;
