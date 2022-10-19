@@ -15,6 +15,8 @@ const Home: NextPage = () => {
   //
   const [querySearch, setQuerySearch] = useState('');
   const [wiggleError, setWiggleError] = useState(false);
+  type viewModeType = 'list' | 'search'
+  const [viewMode, setViewMode] = useState<viewModeType>('list');
 
   const fetchListItems = ()=>{
     
@@ -27,6 +29,7 @@ const Home: NextPage = () => {
       {
         setIsLoading(false)
         if(data.result){  
+          setViewMode('list')
           setTodoList(data.result)
         }
         else {
@@ -85,7 +88,12 @@ const Home: NextPage = () => {
     .then(() => 
       {
         setIsLoading(false);
-        fetchListItems();
+        if(viewMode == 'list'){
+          fetchListItems();
+        }
+        else{
+          searchQuery();
+        }
       }
     )
 
@@ -102,10 +110,47 @@ const Home: NextPage = () => {
       method:'PUT',
       body:JSON.stringify(item)
     })
+    
     .then(() => 
       {
         setIsLoading(false);
-        fetchListItems();
+        if(viewMode == 'list'){
+          fetchListItems();
+        }
+        else{
+          searchQuery();
+        }
+        
+      }
+    )
+
+  }
+
+
+
+  // Search query
+  const searchQuery = () => {
+
+    setWiggleError(false);
+
+    const result: RegExpMatchArray | null = querySearch.match('^\\S.*');
+    if(result == null){
+      setWiggleError(true);
+      return;
+    }
+
+    setIsLoading(true);
+    fetch(`/api/items/search?q=${encodeURI(querySearch)}`, {
+      method:'GET',
+    })
+    .then(response => response.json())
+    .then((data) => 
+      {
+        setIsLoading(false);
+        if(data.result){ 
+          setViewMode('search')
+          setTodoList(data.result)
+        }
       }
     )
 
@@ -128,7 +173,7 @@ const Home: NextPage = () => {
         <div className={styles.searchHeader}>
           <input className={`${styles.searchInput} ${(wiggleError) ? styles.invalid : ''}`} value={querySearch} onChange={e=>{setWiggleError(false); setQuerySearch(e.target.value)}} placeholder='Type an item to add or search'/>
           <button onClick={addToDoItem}>Add</button>
-          <button style={{pointerEvents:'none'}}>Search</button>
+          <button onClick={searchQuery}>Search</button>
         </div>
 
         {/* Results section */}
@@ -136,12 +181,19 @@ const Home: NextPage = () => {
          
           {isError && <p className={styles.errorText}>Something went wrong.. </p>}
           {isLoading && <LoaderWave/>}
+          {viewMode=='search' && (
+          <>
+            <button className={styles.clearSearch} onClick={()=>{setQuerySearch(''); fetchListItems()}}>Clear search result..</button>
+          </>)}
 
-          <ul>
-            { todoList.map((each)=>{
-              return(<EachTodo key={each.id} toDoItem={each} deleteHandler={deleteTodoItem} updateHandler={updateTodoItem}/>)
-            })}
-          </ul> 
+          {(todoList.length < 1) ? <p className={styles.noItems}>No items found.. </p> :
+           (<ul>
+              { todoList.map((each)=>{
+                return(<EachTodo key={each.id} toDoItem={each} deleteHandler={deleteTodoItem} updateHandler={updateTodoItem}/>)
+              })}
+             </ul>)
+          }
+  
             
         </div>
 

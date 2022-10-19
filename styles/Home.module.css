@@ -108,4 +108,22 @@
   animation: shake 0.2s ease-in-out 0s 2;
 }
 
+.noItems{
+  padding:20px;
+  text-align: center;
+}
 
+.clearSearch{
+  background-color: transparent!important;
+  color:#EFB700!important;
+  border-radius:4px!important;
+  margin: 0 auto;
+  display: block;
+  text-align: center;
+  min-height:20px!important;
+  margin-top:20px;
+}
+
+.clearSearch:hover{
+  color:#FDDC7B!important;
+}
