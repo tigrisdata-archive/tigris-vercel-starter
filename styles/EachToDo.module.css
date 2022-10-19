@@ -3,6 +3,7 @@
     flex-direction:row;
     border-bottom: 1px solid #dddddd;
     padding:10px 25px;
+    animation: fadeInAnimation 0.4s cubic-bezier(.62,.57,0,1.02);
 }
 .each:last-child { border-bottom: none; }
 
@@ -13,11 +14,13 @@
     vertical-align: middle;
     padding: 0!important;
 }
+
 .eachButton:hover img{
     content: url("/circle-checked.svg");
 }
+
 .eachButton:hover span{
-    text-decoration: line-through;    
+    text-decoration: line-through; 
 }
 
 .each span{
@@ -39,3 +42,16 @@
 .deleteBtn:focus-visible {
     filter: brightness(0) saturate(100%) invert(98%) sepia(27%) saturate(4410%) hue-rotate(308deg) brightness(115%) contrast(98%);
 }
+
+
+@keyframes fadeInAnimation {
+    from {
+        opacity: 0;
+        transform:translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+  

@@ -14,6 +14,7 @@
   display:flex;
   flex-direction:row;
   gap:10px;
+  margin-top:20px;
 }
 
 .searchInput{
@@ -27,7 +28,7 @@
   min-height:200px;
   border-radius:8px;
   color: #0F2832;
-  
+  overflow: hidden;
 }
 
 .container input {
@@ -111,6 +112,9 @@
 .noItems{
   padding:20px;
   text-align: center;
+  margin-top:20px;
+  color:#A2A3A8;
+
 }
 
 .clearSearch{

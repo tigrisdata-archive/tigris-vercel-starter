@@ -1,4 +1,5 @@
 import type { NextPage } from 'next'
+import Image from 'next/image';
 import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import EachTodo from '../components/LoaderWave/EachToDo'
@@ -18,6 +19,7 @@ const Home: NextPage = () => {
   type viewModeType = 'list' | 'search'
   const [viewMode, setViewMode] = useState<viewModeType>('list');
 
+  // Fetch Todo List
   const fetchListItems = ()=>{
     
     setIsLoading(true);
@@ -44,22 +46,18 @@ const Home: NextPage = () => {
   }
 
 
-  //Load the initial list of todo-items
+  // Load the initial list of todo-items
   useEffect(()=>{
     fetchListItems()
   },[]);
 
   
-  //Add a new todo-item
+  // Add a new todo-item
   const addToDoItem = () => {
-    setWiggleError(false);
 
-    const result: RegExpMatchArray | null = querySearch.match('^\\S.*');
-    if(result == null){
-      setWiggleError(true);
+    if(queryCheckWiggle()){
       return;
     }
-
     setIsLoading(true);
 
     fetch("/api/items", {
@@ -77,7 +75,7 @@ const Home: NextPage = () => {
   }
 
 
-  //Delete Todo-item
+  // Delete Todo-item
   const deleteTodoItem = (id?:number) => {
 
     setIsLoading(true);
@@ -100,7 +98,7 @@ const Home: NextPage = () => {
   }
 
 
-  // Mark Todo-item
+  // Update Todo-item (mark complete/incomplete)
   const updateTodoItem = (item:TodoItem) => {
 
     item.completed = !item.completed;
@@ -131,15 +129,11 @@ const Home: NextPage = () => {
   // Search query
   const searchQuery = () => {
 
-    setWiggleError(false);
-
-    const result: RegExpMatchArray | null = querySearch.match('^\\S.*');
-    if(result == null){
-      setWiggleError(true);
+    if(queryCheckWiggle()){
       return;
     }
-
     setIsLoading(true);
+
     fetch(`/api/items/search?q=${encodeURI(querySearch)}`, {
       method:'GET',
     })
@@ -155,6 +149,30 @@ const Home: NextPage = () => {
     )
 
   }
+
+
+  // Util search query/input check
+  const queryCheckWiggle = () => {
+
+    const result: RegExpMatchArray | null = querySearch.match('^\\S.{0,100}$');
+    if(result === null){
+      setWiggleError(true);
+      return true;
+    }
+    return false;
+  }
+
+  useEffect(()=>{
+    if(!wiggleError){
+      return; 
+    }
+    const timeOut = setTimeout(()=>{
+      setWiggleError(false);
+    },500)
+
+    return () => clearTimeout(timeOut);
+    
+  },[wiggleError])
 
 
   
@@ -179,23 +197,24 @@ const Home: NextPage = () => {
         {/* Results section */}
         <div className={styles.results}>
          
+          {/* Loader, Errors and Back to List mode */}
           {isError && <p className={styles.errorText}>Something went wrong.. </p>}
           {isLoading && <LoaderWave/>}
-          {viewMode=='search' && (
-          <>
-            <button className={styles.clearSearch} onClick={()=>{setQuerySearch(''); fetchListItems()}}>Clear search result..</button>
-          </>)}
+          {viewMode=='search' && <button className={styles.clearSearch} onClick={()=>{setQuerySearch(''); fetchListItems()}}>Go back to list</button>}
 
-          {(todoList.length < 1) ? <p className={styles.noItems}>No items found.. </p> :
+          {/* Todo Item List */}
+          {(todoList.length < 1) ? <p className={styles.noItems}>{(viewMode=='search') ? 'No items found.. ' : 'Add a todo by typing in the field above and hit Add!' }</p> :
            (<ul>
               { todoList.map((each)=>{
                 return(<EachTodo key={each.id} toDoItem={each} deleteHandler={deleteTodoItem} updateHandler={updateTodoItem}/>)
               })}
-             </ul>)
+            </ul>)
           }
   
             
         </div>
+
+        <Image src="/tigris_logo.svg" alt="Tigris Logo" width={100} height={100}/>
 
       </div>
        

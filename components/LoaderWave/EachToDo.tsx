@@ -16,7 +16,7 @@ const EachTodo = ({toDoItem, deleteHandler, updateHandler}:Props) => {
     <>
     <li className={styles.each}>
        <button className={styles.eachButton} onClick={()=>{updateHandler(toDoItem)}}>
-            <Image src={toDoItem.completed ? '/circle-checked.svg' : '/circle.svg'} width={20} height={20} alt='Check Image' />
+            <Image src={toDoItem.completed ? '/circle-checked.svg' : '/circle.svg'} layout="fixed" width={20} height={20} alt='Check Image' />
             <span style={toDoItem.completed ? {textDecoration: 'line-through'} : {}}>{toDoItem.text}</span>
         </button>
         <button className={styles.deleteBtn} onClick={()=>{deleteHandler(toDoItem.id)}}>
