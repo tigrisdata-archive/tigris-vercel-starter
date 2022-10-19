@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { TodoItem } from '../../../lib/schema'
+import { COLLECTION_NAME, TodoItem } from '../../../lib/schema'
 import { Collection } from '@tigrisdata/core'
-import tigrisDb, { COLLECTION_NAME } from '../../../lib/tigris'
+import tigrisDb from '../../../lib/tigris'
 
 type Data = {
   result?: TodoItem,
