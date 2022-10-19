@@ -44,7 +44,7 @@ or do a [code walkthrough](#ui-tour--code-walkthrough) next :tada:
 ## 📖 Running Next.js server & Tigris Data locally
 ### Prerequisites
 1. Tigris installed on your dev computer. [Installation instructions](https://docs.tigrisdata.com/cli/installation)
-2. Node.js version 18+
+2. Node.js version 16+
 
 ### Instructions
 1. Clone this repo on your computer
@@ -60,8 +60,8 @@ npm install
 ```shell
 cp .env.example .env.development
 ```
-Now, open `.env.development` file in any text editor and set `TIGRIS_URI=localhost:8081`. 
-The values for `TIGRIS_CLIENT_ID` and `TIGRIS_CLIENT_SECRET` should be empty to skip auth for local dev.
+Your `.env.development` file should set `TIGRIS_URI=localhost:8081` by default and the values for 
+`TIGRIS_CLIENT_ID` and `TIGRIS_CLIENT_SECRET` should be empty to skip auth for local dev.
 
 4. Build the project
 ```shell
