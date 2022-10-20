@@ -28,7 +28,7 @@ You have two options to run this Next.js app:
 
 ### Instructions
 1. Login to [Tigris console](https://console.preview.tigrisdata.cloud/) and [follow the video instruction](https://docs.tigrisdata.com/auth/)
-to register a new application. In the next step, we will be use the generated `Client ID` and `Client Secret`
+to register a new application. In the next step, we will use the generated `Client ID` and `Client Secret`
 as [Environment Variables](.env.example) when deploying our Next.js app on Vercel.
 2. Hit "Deploy" and follow instructions to fork this repo and deploy app to your Vercel account
 
