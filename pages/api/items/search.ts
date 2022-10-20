@@ -9,7 +9,7 @@ type Data = {
   error?: string
 }
 
-// GET /api/items/search?q=searchQ -- searches for items matching `searchQ`
+// GET /api/items/search?q=searchQ -- searches for items matching text `searchQ`
 export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<Data>

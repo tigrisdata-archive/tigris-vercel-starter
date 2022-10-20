@@ -9,8 +9,8 @@ type Response = {
   error?: string
 }
 
-// GET /api/items?limit=10&skip=1 -- gets a page of items from DB
-// POST /api/items {ToDoItem} -- inserts a new item to DB
+// GET /api/items?limit=10&skip=1 -- gets a page of items from collection
+// POST /api/items {ToDoItem} -- inserts a new item to collection
 export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<Response>

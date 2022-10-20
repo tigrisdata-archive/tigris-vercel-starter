@@ -9,8 +9,8 @@ type Data = {
 }
 
 // GET /api/item/[id] -- gets item from db where id = [id]
-// PUT /api/item/[id] {ToDoItem} -- updates the item in table where id = [id]
-// DELETE /api/item/[id] -- deletes the item in table where id = [id]
+// PUT /api/item/[id] {ToDoItem} -- updates the item in collection where id = [id]
+// DELETE /api/item/[id] -- deletes the item in collection where id = [id]
 export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<Data>
