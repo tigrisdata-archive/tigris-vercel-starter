@@ -3,7 +3,7 @@
 [![Vercel][Vercel]][Vercel-url]
 [![Apache License][license-shield]][license-url]
 
-# ⚡ ️Tigris Data example app on Next.js - Todo list
+# ⚡ ️Tigris example app on Next.js - Todo list
 
 A simple todo app built on [Next.js][Next-url] and [Tigris](https://docs.tigrisdata.com/) 
 using [TypeScript client](https://docs.tigrisdata.com/typescript/), deployed on [Vercel][Vercel-url].
