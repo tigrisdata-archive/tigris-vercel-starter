@@ -5,7 +5,7 @@
 
 # ⚡ ️Tigris Data example app on Next.js - Todo list
 
-A simple todo app built on [Next.js][Next-url] and [Tigris Data](https://tigrisdata.com/) 
+A simple todo app built on [Next.js][Next-url] and [Tigris](https://docs.tigrisdata.com/) 
 using [TypeScript client](https://docs.tigrisdata.com/typescript/), deployed on [Vercel][Vercel-url].
 
 #### Project demo
@@ -24,13 +24,13 @@ You have two options to run this Next.js app:
 ### Prerequisites
 1. A GitHub account. [Sign up here for a free account](https://github.com) if you don't have one.
 2. A Vercel account for deploying app. [Sign up here for a free account][Vercel-url] if you don't have one.
-3. A Tigris Data account. [Sign up here for a free Tigris account](https://www.tigrisdata.com/beta#signup-form) if you don't have one.
+3. A Tigris account. [Sign up here for a free account](https://www.tigrisdata.com/beta#signup-form) if you don't have one.
 
 ### Instructions
-1. Login to [Tigris console](https://console.preview.tigrisdata.cloud/) and get familiar with it, we will register an application in the next step.
-2. [Follow the video instruction](https://docs.tigrisdata.com/auth/) to register a new application. In the next step, we will use the generated `Client ID` and `Client Secret` keys to access Tigris from your Next.js app.
-> You will be asked for tigris URI, Client ID and Client Secret as [Environment Variables](.env.example) when deploying on Vercel.
-3. Hit "Deploy" and follow instructions to fork this repo and deploy app to your Vercel account
+1. Login to [Tigris console](https://console.preview.tigrisdata.cloud/) and [follow the video instruction](https://docs.tigrisdata.com/auth/)
+to register a new application. In the next step, we will be use the generated `Client ID` and `Client Secret`
+as [Environment Variables](.env.example) when deploying our Next.js app on Vercel.
+2. Hit "Deploy" and follow instructions to fork this repo and deploy app to your Vercel account
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter%2F&env=TIGRIS_URI,TIGRIS_CLIENT_ID,TIGRIS_CLIENT_SECRET&envDescription=Application%20secrets%20to%20access%20Tigris%20cloud&envLink=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter%2Fblob%2Fmain%2F.env.example&project-name=tigris-nextjs-todo-app&repo-name=tigris-nextjs-todo-app&demo-title=Tigris%20todo%20app&demo-description=A%20ToDo%20list%20web%20app%20using%20NextJS%20and%20Tigris%20Data)
 
@@ -39,11 +39,13 @@ or do a [code walkthrough](#ui-tour--code-walkthrough) next :tada:
 </details>
 
 <details>
-<summary>2. Running Next.js server & Tigris Data on your local computer</summary>
+<summary>2. Running Next.js server & Tigris dev environment on your local computer</summary>
 
-## 📖 Running Next.js server & Tigris Data locally
+## 📖 Running Next.js server & Tigris locally
 ### Prerequisites
-1. Tigris installed on your dev computer. [Installation instructions](https://docs.tigrisdata.com/cli/installation)
+1. Tigris installed on your dev computer
+   1. For **macOS**: `brew install tigrisdata/tigris/tigris-cli`
+   2. Other operating systems: [See installation instructions here](https://docs.tigrisdata.com/cli/installation)
 2. Node.js version 16+
 
 ### Instructions
@@ -56,23 +58,11 @@ git clone https://github.com/tigrisdata/tigris-vercel-starter
 cd tigris-vercel-starter
 npm install
 ```
-3. Configure the Tigris environment
-```shell
-cp .env.example .env.development
-```
-Your `.env.development` file should set `TIGRIS_URI=localhost:8081` by default and the values for 
-`TIGRIS_CLIENT_ID` and `TIGRIS_CLIENT_SECRET` should be empty to skip auth for local dev.
-
-4. Build the project
-```shell
-npm run build
-```
->Note: This build step will also initialize Tigris database and collection for app.
-
-5. Run the Next.js server
+3. Run the Next.js server
 ```shell
 npm run dev
 ```
+>Note: This step will also initialize Tigris database and collection for app.
 
 :tada: All done. You should be able to use app on `localhost:3000` in browser. Feel free to play 
 around or do a [code walkthrough](#ui-tour--code-walkthrough) next :tada:

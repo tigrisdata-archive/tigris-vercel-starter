@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && npm run setup",
+    "dev": "npm run setup:dev && next dev",
+    "build": "next build && npm run setup:prod",
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -rf node_modules .next",
-    "setup": "npx ts-node scripts/setup.ts"
+    "setup": "npx ts-node scripts/setup.ts",
+    "setup:dev": "APP_ENV=development npm run setup",
+    "setup:prod": "APP_ENV=production npm run setup"
   },
   "dependencies": {
     "@tigrisdata/core": "^1.0.0-beta.11",

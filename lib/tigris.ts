@@ -5,14 +5,14 @@ if (!process.env.TIGRIS_URI) {
   throw new Error('Cannot find TIGRIS_URI environment variable ')
 }
 
-const tigrisUri: string = process.env.TIGRIS_URI as string
+const tigrisUri = process.env.TIGRIS_URI
 const clientConfig: TigrisClientConfig = { serverUrl: tigrisUri }
 
 if (process.env.TIGRIS_CLIENT_ID) {
-  clientConfig.clientId = process.env.TIGRIS_CLIENT_ID as string
+  clientConfig.clientId = process.env.TIGRIS_CLIENT_ID
 }
 if (process.env.TIGRIS_CLIENT_SECRET) {
-  clientConfig.clientSecret = process.env.TIGRIS_CLIENT_SECRET as string
+  clientConfig.clientSecret = process.env.TIGRIS_CLIENT_SECRET
 }
 
 declare global {
