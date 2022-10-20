@@ -1,32 +1,14 @@
-import dotenv from 'dotenv'
-import fs from 'fs'
 import { COLLECTION_NAME, DB_NAME, TodoItemSchema } from '../lib/schema'
 import { Tigris, TigrisClientConfig } from '@tigrisdata/core'
+import { loadEnvConfig } from '@next/env'
 
-if (process.env.NODE_ENV !== 'production') {
-  const configPaths = ['.env.local', '.env.development']
-  let configPath = ''
-
-  for (const path of configPaths) {
-    if (fs.existsSync(path)) {
-      configPath = path
-      break
-    }
+// Run the config loader only when not executing within next runtime
+if (process.env.NODE_ENV === undefined) {
+  if (process.env.APP_ENV === "development") {
+    loadEnvConfig(process.cwd(), true)
+  } else if (process.env.APP_ENV === "production") {
+    loadEnvConfig(process.cwd())
   }
-
-  if (configPath === '') {
-    console.log(
-      `Provide one of the environment files: '${configPaths}' with similar structure as '.env.example'`)
-    process.exit(1)
-  }
-
-  const conf = dotenv.config({ path: configPath })
-  if (conf.error) {
-    console.log(`Failed to load environment file. Error: ${conf.error.message}`)
-    process.exit(1)
-  }
-
-  console.log(`Loaded environment variables file ${configPath}`)
 }
 
 async function main () {
@@ -35,14 +17,14 @@ async function main () {
     process.exit(1)
   }
   // setup client
-  const tigrisUri: string = process.env.TIGRIS_URI as string
+  const tigrisUri = process.env.TIGRIS_URI
   const clientConfig: TigrisClientConfig = { serverUrl: tigrisUri }
 
   if (process.env.TIGRIS_CLIENT_ID) {
-    clientConfig.clientId = process.env.TIGRIS_CLIENT_ID as string
+    clientConfig.clientId = process.env.TIGRIS_CLIENT_ID
   }
   if (process.env.TIGRIS_CLIENT_SECRET) {
-    clientConfig.clientSecret = process.env.TIGRIS_CLIENT_SECRET as string
+    clientConfig.clientSecret = process.env.TIGRIS_CLIENT_SECRET
   }
   const tigrisClient = new Tigris(clientConfig)
   console.log(`Using Tigris at ${tigrisUri}`)
