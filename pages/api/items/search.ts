@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { COLLECTION_NAME, TodoItem } from '../../../lib/schema'
 import { SearchRequest } from '@tigrisdata/core/dist/search/types'
-import { Collection } from '@tigrisdata/core'
 import tigrisDb from '../../../lib/tigris'
 
 type Data = {
@@ -20,7 +19,7 @@ export default async function handler (
     return
   }
   try {
-    const itemsCollection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME)
     const searchRequest: SearchRequest<TodoItem> = { q: query as string }
     const searchResult = await itemsCollection.search(searchRequest)
     const items = new Array<TodoItem>()
