@@ -71,7 +71,7 @@ around or do a [code walkthrough](#ui-tour--code-walkthrough) next :tada:
 # 👀 UI tour & Code walkthrough
 
 
-# Next steps
+# 🚀 Next steps
 In a few steps, we learnt how to bootstrap a Next.js app using Tigris and deploy it on Vercel. Feel
 free to add more functionalities or customize App for your use-case and learn more about 
 [Tigris data platform](https://docs.tigrisdata.com/overview/) 

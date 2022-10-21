@@ -1,6 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { COLLECTION_NAME, TodoItem } from '../../../lib/schema'
-import { Collection } from '@tigrisdata/core'
 import tigrisDb from '../../../lib/tigris'
 
 type Data = {
@@ -8,9 +7,9 @@ type Data = {
   error?: string
 }
 
-// GET /api/item/[id] -- gets item from db where id = [id]
-// PUT /api/item/[id] {ToDoItem} -- updates the item in table where id = [id]
-// DELETE /api/item/[id] -- deletes the item in table where id = [id]
+// GET /api/item/[id] -- gets item from collection where id = [id]
+// PUT /api/item/[id] {ToDoItem} -- updates the item in collection where id = [id]
+// DELETE /api/item/[id] -- deletes the item in collection where id = [id]
 export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<Data>
@@ -38,8 +37,8 @@ async function handleGet (
   itemId: number
 ) {
   try {
-    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
-    const item = await collection.findOne({ id: itemId })
+    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME)
+    const item = await itemsCollection.findOne({ id: itemId })
     if (!item) {
       res.status(404).json({ error:'No item found' })
     } else {
@@ -57,8 +56,8 @@ async function handlePut (
 ) {
   try {
     const item = JSON.parse(req.body) as TodoItem
-    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
-    const updated = await collection.insertOrReplaceOne(item)
+    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME)
+    const updated = await itemsCollection.insertOrReplaceOne(item)
     res.status(200).json({ result: updated })
   } catch (err) {
     const error = err as Error
@@ -72,8 +71,8 @@ async function handleDelete (
   itemId: number
 ) {
   try {
-    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
-    const status = (await collection.deleteOne({ id: itemId })).status
+    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME)
+    const status = (await itemsCollection.deleteOne({ id: itemId })).status
     if (status === 'deleted') {
       res.status(200).json({})
     } else {

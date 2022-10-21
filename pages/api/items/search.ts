@@ -1,7 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { COLLECTION_NAME, TodoItem } from '../../../lib/schema'
 import { SearchRequest } from '@tigrisdata/core/dist/search/types'
-import { Collection } from '@tigrisdata/core'
 import tigrisDb from '../../../lib/tigris'
 
 type Data = {
@@ -9,7 +8,7 @@ type Data = {
   error?: string
 }
 
-// GET /api/items/search?q=searchQ -- searches for items matching `searchQ`
+// GET /api/items/search?q=searchQ -- searches for items matching text `searchQ`
 export default async function handler (
   req: NextApiRequest,
   res: NextApiResponse<Data>
@@ -20,9 +19,9 @@ export default async function handler (
     return
   }
   try {
-    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME)
     const searchRequest: SearchRequest<TodoItem> = { q: query as string }
-    const searchResult = await collection.search(searchRequest)
+    const searchResult = await itemsCollection.search(searchRequest)
     const items = new Array<TodoItem>()
     for (const hit of searchResult.hits) {
       items.push(hit.document)
