@@ -1,15 +1,14 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { COLLECTION_NAME, TodoItem } from '../../../lib/schema'
 import { Collection } from '@tigrisdata/core'
-import tigrisDb  from '../../../lib/tigris'
-import { ReadRequestOptions } from '@tigrisdata/core/dist/types'
+import tigrisDb from '../../../lib/tigris'
 
 type Response = {
   result?: Array<TodoItem>,
   error?: string
 }
 
-// GET /api/items?limit=10&skip=1 -- gets a page of items from collection
+// GET /api/items -- gets items from collection
 // POST /api/items {ToDoItem} -- inserts a new item to collection
 export default async function handler (
   req: NextApiRequest,
@@ -31,13 +30,8 @@ export default async function handler (
 async function handleGet (req: NextApiRequest,
   res: NextApiResponse<Response>) {
   try {
-    const limit = Number(req.query['limit']) || 20
-    const skip = Number(req.query['skip']) || 0
-
     const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
-    const options = new ReadRequestOptions(limit, skip)
-    const cursor = collection.findMany(undefined, undefined, undefined,
-      options)
+    const cursor = collection.findMany()
     const items = await cursor.toArray()
     res.status(200).json({ result: items })
   } catch (err) {

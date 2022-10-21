@@ -8,7 +8,7 @@ type Data = {
   error?: string
 }
 
-// GET /api/item/[id] -- gets item from db where id = [id]
+// GET /api/item/[id] -- gets item from collection where id = [id]
 // PUT /api/item/[id] {ToDoItem} -- updates the item in collection where id = [id]
 // DELETE /api/item/[id] -- deletes the item in collection where id = [id]
 export default async function handler (
