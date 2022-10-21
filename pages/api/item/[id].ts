@@ -38,8 +38,8 @@ async function handleGet (
   itemId: number
 ) {
   try {
-    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
-    const item = await collection.findOne({ id: itemId })
+    const itemsCollection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const item = await itemsCollection.findOne({ id: itemId })
     if (!item) {
       res.status(404).json({ error:'No item found' })
     } else {
@@ -57,8 +57,8 @@ async function handlePut (
 ) {
   try {
     const item = JSON.parse(req.body) as TodoItem
-    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
-    const updated = await collection.insertOrReplaceOne(item)
+    const itemsCollection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const updated = await itemsCollection.insertOrReplaceOne(item)
     res.status(200).json({ result: updated })
   } catch (err) {
     const error = err as Error
@@ -72,8 +72,8 @@ async function handleDelete (
   itemId: number
 ) {
   try {
-    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
-    const status = (await collection.deleteOne({ id: itemId })).status
+    const itemsCollection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const status = (await itemsCollection.deleteOne({ id: itemId })).status
     if (status === 'deleted') {
       res.status(200).json({})
     } else {

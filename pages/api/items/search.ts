@@ -20,9 +20,9 @@ export default async function handler (
     return
   }
   try {
-    const collection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
+    const itemsCollection: Collection<TodoItem> = tigrisDb.getCollection(COLLECTION_NAME)
     const searchRequest: SearchRequest<TodoItem> = { q: query as string }
-    const searchResult = await collection.search(searchRequest)
+    const searchResult = await itemsCollection.search(searchRequest)
     const items = new Array<TodoItem>()
     for (const hit of searchResult.hits) {
       items.push(hit.document)
