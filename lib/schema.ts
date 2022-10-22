@@ -1,10 +1,7 @@
-import {
-  TigrisCollectionType,
-  TigrisDataTypes, TigrisSchema
-} from '@tigrisdata/core/dist/types'
+import { TigrisCollectionType, TigrisDataTypes, TigrisSchema } from '@tigrisdata/core/dist/types';
 
-export const DB_NAME = 'tigris_vercel_starter'
-export const COLLECTION_NAME = 'todoItems'
+export const DB_NAME = 'tigris_vercel_starter';
+export const COLLECTION_NAME = 'todoItems';
 
 export interface TodoItem extends TigrisCollectionType {
   id?: number;
@@ -18,5 +15,5 @@ export const TodoItemSchema: TigrisSchema<TodoItem> = {
     primary_key: { order: 1, autoGenerate: true }
   },
   text: { type: TigrisDataTypes.STRING },
-  completed: { type: TigrisDataTypes.BOOLEAN },
-}
+  completed: { type: TigrisDataTypes.BOOLEAN }
+};
