@@ -8,12 +8,14 @@ import { TodoItem } from '../lib/schema';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
+  // This is the input field
+  const [textInput, setTextInput] = useState('');
+
+  // Todo list array which displays the todo items
   const [todoList, setTodoList] = useState<TodoItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
-  //
-  const [querySearch, setQuerySearch] = useState('');
   const [wiggleError, setWiggleError] = useState(false);
   type viewModeType = 'list' | 'search';
   const [viewMode, setViewMode] = useState<viewModeType>('list');
@@ -54,10 +56,10 @@ const Home: NextPage = () => {
 
     fetch('/api/items', {
       method: 'POST',
-      body: JSON.stringify({ text: querySearch, completed: false })
+      body: JSON.stringify({ text: textInput, completed: false })
     }).then(() => {
       setIsLoading(false);
-      setQuerySearch('');
+      setTextInput('');
       fetchListItems();
     });
   };
@@ -103,7 +105,7 @@ const Home: NextPage = () => {
     }
     setIsLoading(true);
 
-    fetch(`/api/items/search?q=${encodeURI(querySearch)}`, {
+    fetch(`/api/items/search?q=${encodeURI(textInput)}`, {
       method: 'GET'
     })
       .then(response => response.json())
@@ -118,7 +120,7 @@ const Home: NextPage = () => {
 
   // Util search query/input check
   const queryCheckWiggle = () => {
-    const result: RegExpMatchArray | null = querySearch.match('^\\S.{0,100}$');
+    const result: RegExpMatchArray | null = textInput.match('^\\S.{0,100}$');
     if (result === null) {
       setWiggleError(true);
       return true;
@@ -151,10 +153,10 @@ const Home: NextPage = () => {
         <div className={styles.searchHeader}>
           <input
             className={`${styles.searchInput} ${wiggleError ? styles.invalid : ''}`}
-            value={querySearch}
+            value={textInput}
             onChange={e => {
               setWiggleError(false);
-              setQuerySearch(e.target.value);
+              setTextInput(e.target.value);
             }}
             placeholder="Type an item to add or search"
           />
@@ -171,7 +173,7 @@ const Home: NextPage = () => {
             <button
               className={styles.clearSearch}
               onClick={() => {
-                setQuerySearch('');
+                setTextInput('');
                 fetchListItems();
               }}
             >
