@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
-import { TodoItem } from '../../lib/schema';
-import styles from '../../styles/EachToDo.module.css';
+import { TodoItem } from '../lib/schema';
+import styles from '../styles/EachToDo.module.css';
 
 type Props = {
   toDoItem: TodoItem;
