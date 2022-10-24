@@ -71,7 +71,10 @@ around or do a [code walkthrough](#code-walkthrough) next :tada:
 </details>
 
 # 👀 Code walkthrough
-### 📂 File structure
+
+<details>
+<summary> 📂 File structure</summary>
+
 ```shell
 ├── package.json
 ├── lib
@@ -86,15 +89,24 @@ around or do a [code walkthrough](#code-walkthrough) next :tada:
             ├── index.ts
             └── search.ts
 ```
+</details>
 
-### 🗄️ Tigris schema definition - [lib/schema.ts](lib/schema.ts)
-The to-do list app has a single collection `todoItems` that stores the to-do items.
+<details>
+<summary> 🗄️ Tigris schema definition</summary>
 
-### 🌐 Connecting to Tigris - [lib/tigris.ts](lib/tigris.ts)
-This file loads the environment variables you specified previously in creating a Vercel project
+[lib/schema.ts](lib/schema.ts) - The to-do list app has a single collection `todoItems` that stores the to-do items.
+</details>
+
+<details>
+<summary> 🌐 Connecting to Tigris</summary>
+
+[lib/tigris.ts](lib/tigris.ts) - Loads the environment variables you specified previously in creating a Vercel project
 section and uses them to configure the Tigris client.
+</details>
 
-### ❇️ API routes to access data in Tigris collection - [pages/api/](pages/api/)
+<details>
+<summary> ❇️ API routes to access data in Tigris collection</summary>
+
 All the Next.js API routes are defined under `pages/api/`. We have three files exposing endpoints: 
 #### [`pages/api/items/index.ts`](pages/api/items/index.ts)
 - `GET /api/items` to get an array of to-do items as Array<TodoItem>
@@ -107,6 +119,8 @@ All the Next.js API routes are defined under `pages/api/`. We have three files e
 - `GET /api/item/{id}` to fetch an item
 - `PUT /api/item/{id}` to update the given item
 - `DELETE /api/item/[id]` to delete an item
+
+</details>
 
 # 🚀 Next steps
 In a few steps, we learnt how to bootstrap a Next.js app using Tigris and deploy it on Vercel. Feel
