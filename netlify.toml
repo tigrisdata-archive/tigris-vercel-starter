@@ -1,0 +1,4 @@
+[template.environment]
+  TIGRIS_URI = "change me for your tigris uri"
+  TIGRIS_CLIENT_ID = "change me for your tigris client id"
+  TIGRIS_CLIENT_SECRET = "change me for your tigris client secret"
