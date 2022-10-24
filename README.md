@@ -1,3 +1,5 @@
+<a name="readme-top"></a>
+
 [![Next][Next.js]][Next-url]
 [![TypeScript][TypeScript]][TypeScript-url]
 [![Vercel][Vercel]][Vercel-url]
@@ -35,7 +37,7 @@ as [Environment Variables](.env.example) when deploying our Next.js app on Verce
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter%2F&env=TIGRIS_URI,TIGRIS_CLIENT_ID,TIGRIS_CLIENT_SECRET&envDescription=Application%20secrets%20to%20access%20Tigris%20cloud&envLink=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter%2Fblob%2Fmain%2F.env.example&project-name=tigris-nextjs-todo-app&repo-name=tigris-nextjs-todo-app&demo-title=Tigris%20todo%20app&demo-description=A%20ToDo%20list%20web%20app%20using%20NextJS%20and%20Tigris%20Data)
 
 :tada: All done. You should be able to use app on the URL provided by Vercel. Feel free to play around
-or do a [code walkthrough](#ui-tour--code-walkthrough) next :tada:
+or do a [code walkthrough](#code-walkthrough) next :tada:
 </details>
 
 <details>
@@ -65,16 +67,67 @@ npm run dev
 >Note: This step will also initialize Tigris database and collection for app.
 
 :tada: All done. You should be able to use app on `localhost:3000` in browser. Feel free to play 
-around or do a [code walkthrough](#ui-tour--code-walkthrough) next :tada:
+around or do a [code walkthrough](#code-walkthrough) next :tada:
 </details>
 
-# 👀 UI tour & Code walkthrough
+# 👀 Code walkthrough
+### 📂 File structure
+```shell
+├── package.json
+├── lib
+│   ├── schema.ts
+│   ├── tigris.ts
+└── pages
+    ├── index.tsx
+    └── api
+        ├── item
+        │   ├── [id].ts
+        └── items
+            ├── index.ts
+            └── search.ts
+```
 
+### 🗄️ Tigris schema definition - [lib/schema.ts](lib/schema.ts)
+The to-do list app has a single collection `todoItems` that stores the to-do items.
+
+### 🌐 Connecting to Tigris - [lib/tigris.ts](lib/tigris.ts)
+This file loads the environment variables you specified previously in creating a Vercel project
+section and uses them to configure the Tigris client.
+
+### ❇️ API routes to access data in Tigris collection - [pages/api/](pages/api/)
+All the Next.js API routes are defined under `pages/api/`. We have three files exposing endpoints: 
+#### [`pages/api/items/index.ts`](pages/api/items/index.ts)
+- `GET /api/items` to get an array of to-do items as Array<TodoItem>
+- `POST /api/items` to add an item to the list
+
+#### [`/pages/api/items/search.ts`](/pages/api/items/search.ts)
+- `GET /api/items/search?q=query` to find and return items matching the given query
+
+#### [`pages/api/item/[id].ts`](pages/api/item/[id].ts)
+- `GET /api/item/{id}` to fetch an item
+- `PUT /api/item/{id}` to update the given item
+- `DELETE /api/item/[id]` to delete an item
 
 # 🚀 Next steps
 In a few steps, we learnt how to bootstrap a Next.js app using Tigris and deploy it on Vercel. Feel
 free to add more functionalities or customize App for your use-case and learn more about 
 [Tigris data platform](https://docs.tigrisdata.com/overview/) 
+
+# 🤝 Contributing
+Contributions are what make the open source community such an amazing place to learn, inspire, and create.
+Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. 
+You can also simply open an issue. Don't forget to give the project a star! 
+Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
