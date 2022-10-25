@@ -33,15 +33,11 @@ You have two options to run this Next.js app:
 3. A Tigris account. [Sign up here for a free account](https://www.tigrisdata.com/beta#signup-form) if you don't have one.
 
 ### Instructions
+1. [Tigris integration](https://vercel.com/integrations/tigris) with Vercel will automatically fetch 
+access keys to populate [Environment Variables](.env.example) when deploying app. Now just hit "Deploy"
+and follow instructions to fork this repo and deploy app to your Vercel account
 
-1. Login to [Tigris Cloud Console](https://console.preview.tigrisdata.cloud/) 
-   and [follow the video instruction](https://youtu.be/Ls50EOrU3AQ) to 
-   create new application credentials. These credentials will be used by the 
-   Next.js app to connect and authenticate with Tigris. In the next step, we will use the 
-   generated `Client ID` and `Client Secret` as Environment Variables when deploying our Next.js app on Vercel.
-2. Hit "Deploy" and follow instructions to fork this repo and deploy app to your Vercel account
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter%2F&env=TIGRIS_URI,TIGRIS_CLIENT_ID,TIGRIS_CLIENT_SECRET&envDescription=Application%20secrets%20to%20access%20Tigris%20cloud&envLink=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter%2Fblob%2Fmain%2F.env.example&project-name=tigris-nextjs-todo-app&repo-name=tigris-nextjs-todo-app&demo-title=Tigris%20todo%20app&demo-description=A%20ToDo%20list%20web%20app%20using%20NextJS%20and%20Tigris%20Data)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter&project-name=todo-list-app-tigris&repo-name=todo-list-webapp-tigris&demo-title=My%20To-do%20list%20webapp&demo-description=A%20To-do%20list%20webapp%20using%20NextJS%20and%20Tigris&integration-ids=oac_Orjx197uMuJobdSaEpVv2Zn8)
 
 :tada: All done. You should be able to use app on the URL provided by Vercel. Feel free to play around
 or do a [code walkthrough](#code-walkthrough) next :tada:
