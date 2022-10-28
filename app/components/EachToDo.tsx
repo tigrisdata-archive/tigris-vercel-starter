@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
-import { TodoItem } from '../lib/schema';
-import styles from '../styles/EachToDo.module.css';
+import { TodoItem } from '../../lib/schema';
+import styles from './EachToDo.module.css';
 
 type Props = {
   toDoItem: TodoItem;
@@ -20,7 +20,6 @@ const EachTodo = ({ toDoItem, deleteHandler, updateHandler }: Props) => {
         >
           <Image
             src={toDoItem.completed ? '/circle-checked.svg' : '/circle.svg'}
-            layout="fixed"
             width={20}
             height={20}
             alt="Check Image"

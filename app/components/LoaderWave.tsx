@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from '../styles/LoaderWave.module.css';
+import styles from './LoaderWave.module.css';
 
 const LoaderWave = () => {
   return (
