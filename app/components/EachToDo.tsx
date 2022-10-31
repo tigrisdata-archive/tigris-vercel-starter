@@ -3,7 +3,6 @@
 import Image from 'next/image';
 import React from 'react';
 import { TodoItem } from '../../lib/schema';
-import styles from './EachToDo.module.css';
 
 type Props = {
   toDoItem: TodoItem;
@@ -13,9 +12,9 @@ type Props = {
 const EachTodo = ({ toDoItem, deleteHandler, updateHandler }: Props) => {
   return (
     <>
-      <li className={styles.each}>
+      <li className="each">
         <button
-          className={styles.eachButton}
+          className="eachButton"
           onClick={() => {
             updateHandler(toDoItem);
           }}
@@ -29,7 +28,7 @@ const EachTodo = ({ toDoItem, deleteHandler, updateHandler }: Props) => {
           <span style={toDoItem.completed ? { textDecoration: 'line-through' } : {}}>{toDoItem.text}</span>
         </button>
         <button
-          className={styles.deleteBtn}
+          className="deleteBtn"
           onClick={() => {
             deleteHandler(toDoItem.id);
           }}
