@@ -108,7 +108,6 @@ body {
 body {
   min-width: 768px;
   line-height: 1;
-  font-family: 'Rubik', sans-serif;
   color: #ffffff;
 }
 
@@ -323,8 +322,11 @@ h1 {
   background-color: transparent !important;
   width: 100%;
   text-align: left;
-  vertical-align: middle;
   padding: 0 !important;
+}
+
+.eachButton > img {
+  vertical-align: middle;
 }
 
 .eachButton:hover img {
