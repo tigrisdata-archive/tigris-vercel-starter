@@ -7,16 +7,16 @@
 
 # ⚡ ️Tigris example app on Next.js - Todo list
 
-A simple todo app built on [Next.js][Next-url] and [Tigris](https://docs.tigrisdata.com/) 
+A simple todo app built on [Next.js 13][Next-url] and [Tigris](https://docs.tigrisdata.com/) 
 using [TypeScript client](https://docs.tigrisdata.com/typescript/), deployed on [Vercel][Vercel-url].
 
 #### Project demo
 
-<a href="https://tigris-nextjs-starter-kit.vercel.app/">
+<a href="https://tigris-nextjs-13-todo-list.vercel.app/">
     <img src="public/readme/todo_app_screenshot.jpg" alt="Todo web app">
 </a>
 
-https://tigris-nextjs-starter-kit.vercel.app/
+https://tigris-nextjs-13-todo-list.vercel.app/
 
 # ⚙️ Deploying the app
 
@@ -162,6 +162,6 @@ Thanks again!
 [Vercel]: https://img.shields.io/badge/vercel-F22F46?style=for-the-badge&logo=vercel&logoColor=white
 [Vercel-url]: https://vercel.com/
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
-[Next-url]: https://nextjs.org/
+[Next-url]: https://nextjs.org/blog/next-13
 [license-shield]: https://img.shields.io/github/license/tigrisdata/tigris-vercel-starter.svg?style=for-the-badge
 [license-url]: LICENSE
