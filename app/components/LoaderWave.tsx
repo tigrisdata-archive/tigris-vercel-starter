@@ -1,14 +1,13 @@
 'use client';
 
 import React from 'react';
-import styles from './LoaderWave.module.css';
 
 const LoaderWave = () => {
   return (
-    <div className={styles.holder}>
-      <div className={`${styles.loader} ${styles.l1}`}></div>
-      <div className={`${styles.loader} ${styles.l2}`}></div>
-      <div className={`${styles.loader} ${styles.l3}`}></div>
+    <div className="holder">
+      <div className="loader l1"></div>
+      <div className="loader l2"></div>
+      <div className="loader l3"></div>
     </div>
   );
 };

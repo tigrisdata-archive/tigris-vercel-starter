@@ -5,7 +5,6 @@ import React, { useEffect, useState } from 'react';
 import EachTodo from './EachToDo';
 import LoaderWave from './LoaderWave';
 import { TodoItem } from '../../lib/schema';
-import styles from './Home.module.css';
 
 const Home = () => {
   // This is the input field
@@ -172,13 +171,13 @@ const Home = () => {
 
   return (
     <div>
-      <div className={styles.container}>
+      <div className="container">
         <h2>Sample Todo app using Next.js and Tigris</h2>
 
         {/* Search Header */}
-        <div className={styles.searchHeader}>
+        <div className="searchHeader">
           <input
-            className={`${styles.searchInput} ${wiggleError ? styles.invalid : ''}`}
+            className={`searchInput ${wiggleError ? 'invalid' : ''}`}
             value={textInput}
             onChange={e => {
               setWiggleError(false);
@@ -191,13 +190,13 @@ const Home = () => {
         </div>
 
         {/* Results section */}
-        <div className={styles.results}>
+        <div className="results">
           {/* Loader, Errors and Back to List mode */}
-          {isError && <p className={styles.errorText}>Something went wrong.. </p>}
+          {isError && <p className="errorText">Something went wrong.. </p>}
           {isLoading && <LoaderWave />}
           {viewMode == 'search' && (
             <button
-              className={styles.clearSearch}
+              className="clearSearch"
               onClick={() => {
                 setTextInput('');
                 fetchListItems();
@@ -209,7 +208,7 @@ const Home = () => {
 
           {/* Todo Item List */}
           {todoList.length < 1 ? (
-            <p className={styles.noItems}>
+            <p className="noItems">
               {viewMode == 'search' ? 'No items found.. ' : 'Add a todo by typing in the field above and hit Add!'}
             </p>
           ) : (
