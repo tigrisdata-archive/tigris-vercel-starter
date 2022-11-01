@@ -101,11 +101,15 @@ around or do a [code walk-through](#code-walkthrough) next :tada:
 </details>
 
 <details>
-<summary> 🗄️ Tigris schema definition</summary>
+<summary> 🪢 Tigris schema definition</summary>
 
 [models/tigris/todoStarterApp/todoItems.ts](models/tigris/todoStarterApp/todoItems.ts) - The to-do list app 
 has a single collection `todoItems` that stores the to-do items in `todoStarterApp` database. The
 Database and Collection get automatically provisioned by the [setup script](scripts/setup.ts).
+    
+This is an inspiration from Next.js based file system router. Create a folder or drop a schema file 
+inside database folder under `models/tigris/`, and you're able to instantly create Databases and 
+Collections in Tigris for your application.
 </details>
 
 <details>
