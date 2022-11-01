@@ -20,16 +20,20 @@ https://tigris-nextjs-starter-kit.vercel.app/
 
 # ⚙️ Deploying the app
 
-Now just hit "Deploy" sand follow instructions to fork this repo and deploy 
-app to your Vercel account
+All you need is a [Github](https://github.com), [Vercel][Vercel-url] and Tigris
+account([sign up for a free account](https://www.tigrisdata.com/beta#signup-form)). Now, Hit "Deploy"
+and follow instructions to deploy app to your Vercel account
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter&project-name=todo-list-app-tigris&repo-name=todo-list-webapp-tigris&demo-title=My%20To-do%20list%20webapp&demo-description=A%20To-do%20list%20webapp%20using%20NextJS%20and%20Tigris&integration-ids=oac_Orjx197uMuJobdSaEpVv2Zn8)
+[![Deploy with Vercel](https://vercel.com/button)][Deploy-url]
 
 :tada: All done. You should be able to use app on the URL provided by Vercel. Feel free to play around
 or do a [code walkthrough](#code-walkthrough) next :tada:
 
+> [Tigris integration](https://vercel.com/integrations/tigris) with Vercel will automatically fetch
+access keys to populate [Environment Variables](.env.example) when deploying app.
+
 <details>
-<summary>Running Next.js server & Tigris dev environment on your local computer</summary>
+<summary>2. Running Next.js server & Tigris dev environment on your local computer</summary>
 
 ## 📖 Running Next.js server & Tigris locally
 
@@ -155,6 +159,7 @@ Thanks again!
 [TypeScript-url]: https://www.typescriptlang.org/
 [Vercel]: https://img.shields.io/badge/vercel-F22F46?style=for-the-badge&logo=vercel&logoColor=white
 [Vercel-url]: https://vercel.com/
+[Deploy-url]: https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter&project-name=todo-list-app-tigris&repo-name=todo-list-webapp-tigris&demo-title=My%20To-do%20list%20webapp&demo-description=A%20To-do%20list%20webapp%20using%20NextJS%20and%20Tigris&integration-ids=oac_Orjx197uMuJobdSaEpVv2Zn8
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
 [license-shield]: https://img.shields.io/github/license/tigrisdata/tigris-vercel-starter.svg?style=for-the-badge
