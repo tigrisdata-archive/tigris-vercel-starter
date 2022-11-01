@@ -84,8 +84,11 @@ around or do a [code walk-through](#code-walkthrough) next :tada:
 ```text
 ├── package.json
 ├── lib
-│   ├── schema.ts
 │   ├── tigris.ts
+├── models
+│   └── tigris
+│       └── todoStarterApp
+│           └── todoItems.ts
 └── pages
     ├── index.tsx
     └── api
@@ -100,7 +103,9 @@ around or do a [code walk-through](#code-walkthrough) next :tada:
 <details>
 <summary> 🗄️ Tigris schema definition</summary>
 
-[lib/schema.ts](lib/schema.ts) - The to-do list app has a single collection `todoItems` that stores the to-do items.
+[models/tigris/todoStarterApp/todoItems.ts](models/tigris/todoStarterApp/todoItems.ts) - The to-do list app 
+has a single collection `todoItems` that stores the to-do items in `todoStarterApp` database. The
+Database and Collection get automatically provisioned by the [setup script](scripts/setup.ts).
 </details>
 
 <details>

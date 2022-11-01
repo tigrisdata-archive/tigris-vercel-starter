@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { TodoItem } from '../lib/schema';
+import { TodoItem } from '../models/tigris/todoStarterApp/todoItems';
 import styles from '../styles/EachToDo.module.css';
 
 type Props = {

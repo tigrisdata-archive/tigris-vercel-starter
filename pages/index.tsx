@@ -4,7 +4,7 @@ import Head from 'next/head';
 import React, { useEffect, useState } from 'react';
 import EachTodo from '../components/EachToDo';
 import LoaderWave from '../components/LoaderWave';
-import { TodoItem } from '../lib/schema';
+import { TodoItem } from '../models/tigris/todoStarterApp/todoItems';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -124,7 +124,7 @@ const Home: NextPage = () => {
   // Search query
   /*
   'searchQuery' method takes the state from 'textInput' and send it over to the 'api/items/search' endpoint via a query param 'q'.
-  The response is the same as the response from "fetch('/api/items')", an array of TodoItems if successful. 
+  The response is the same as the response from "fetch('/api/items')", an array of TodoItems if successful.
   */
   const searchQuery = () => {
     if (queryCheckWiggle()) {
