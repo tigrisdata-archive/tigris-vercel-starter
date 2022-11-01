@@ -20,31 +20,16 @@ https://tigris-nextjs-starter-kit.vercel.app/
 
 # ⚙️ Deploying the app
 
-You have two options to run this Next.js app:
-<details>
-<summary>1. Deploy on Vercel using Tigris Cloud (Recommended)</summary>
-
-## 📖 Vercel & Tigris Cloud (Recommended)
-
-### Prerequisites
-
-1. A GitHub account. [Sign up here for a free account](https://github.com) if you don't have one.
-2. A Vercel account for deploying app. [Sign up here for a free account][Vercel-url] if you don't have one.
-3. A Tigris account. [Sign up here for a free account](https://www.tigrisdata.com/beta#signup-form) if you don't have one.
-
-### Instructions
-1. [Tigris integration](https://vercel.com/integrations/tigris) with Vercel will automatically fetch 
-access keys to populate [Environment Variables](.env.example) when deploying app. Now just hit "Deploy"
-and follow instructions to fork this repo and deploy app to your Vercel account
+Now just hit "Deploy" sand follow instructions to fork this repo and deploy 
+app to your Vercel account
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Ftigrisdata%2Ftigris-vercel-starter&project-name=todo-list-app-tigris&repo-name=todo-list-webapp-tigris&demo-title=My%20To-do%20list%20webapp&demo-description=A%20To-do%20list%20webapp%20using%20NextJS%20and%20Tigris&integration-ids=oac_Orjx197uMuJobdSaEpVv2Zn8)
 
 :tada: All done. You should be able to use app on the URL provided by Vercel. Feel free to play around
 or do a [code walkthrough](#code-walkthrough) next :tada:
-</details>
 
 <details>
-<summary>2. Running Next.js server & Tigris dev environment on your local computer</summary>
+<summary>Running Next.js server & Tigris dev environment on your local computer</summary>
 
 ## 📖 Running Next.js server & Tigris locally
 
