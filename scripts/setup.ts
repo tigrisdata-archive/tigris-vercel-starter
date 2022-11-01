@@ -18,7 +18,7 @@ async function main() {
   }
   // setup client
   const tigrisClient = new Tigris();
-  await tigrisClient.registerSchemas(path.join(process.cwd(), 'models/tigris'));
+  await tigrisClient.registerSchemas('models/tigris');
 }
 
 main();
