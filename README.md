@@ -21,7 +21,7 @@ https://tigris-nextjs-starter-kit.vercel.app/
 # ⚙️ Deploying the app
 
 All you need is a [Github](https://github.com), [Vercel][Vercel-url] and Tigris
-account([sign up for a free account](https://www.tigrisdata.com/beta#signup-form)). Now, Hit "Deploy"
+account([sign up for a free account](https://www.tigrisdata.com/nextjs#signup-form)). Now, Hit "Deploy"
 and follow instructions to deploy app to your Vercel account
 
 [![Deploy with Vercel](https://vercel.com/button)][Deploy-url]
