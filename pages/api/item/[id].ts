@@ -29,43 +29,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 }
 
 async function handleGet(req: NextApiRequest, res: NextApiResponse<Data>, itemId: number) {
-  try {
-    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME);
-    const item = await itemsCollection.findOne({ id: itemId });
-    if (!item) {
-      res.status(404).json({ error: 'No item found' });
-    } else {
-      res.status(200).json({ result: item });
-    }
-  } catch (err) {
-    const error = err as Error;
-    res.status(500).json({ error: error.message });
-  }
+  // TODO: Implement me
 }
 
 async function handlePut(req: NextApiRequest, res: NextApiResponse<Data>) {
-  try {
-    const item = JSON.parse(req.body) as TodoItem;
-    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME);
-    const updated = await itemsCollection.insertOrReplaceOne(item);
-    res.status(200).json({ result: updated });
-  } catch (err) {
-    const error = err as Error;
-    res.status(500).json({ error: error.message });
-  }
+  // TODO: Implement me
 }
 
 async function handleDelete(req: NextApiRequest, res: NextApiResponse<Data>, itemId: number) {
-  try {
-    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME);
-    const status = (await itemsCollection.deleteOne({ id: itemId })).status;
-    if (status === 'deleted') {
-      res.status(200).json({});
-    } else {
-      res.status(500).json({ error: `Failed to delete ${itemId}` });
-    }
-  } catch (err) {
-    const error = err as Error;
-    res.status(500).json({ error: error.message });
-  }
+  // TODO: Implement me
 }
