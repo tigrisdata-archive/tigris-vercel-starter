@@ -24,25 +24,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 }
 
 async function handleGet(req: NextApiRequest, res: NextApiResponse<Response>) {
-  try {
-    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME);
-    const cursor = itemsCollection.findMany();
-    const items = await cursor.toArray();
-    res.status(200).json({ result: items });
-  } catch (err) {
-    const error = err as Error;
-    res.status(500).json({ error: error.message });
-  }
+  // TODO: Implement me
 }
 
 async function handlePost(req: NextApiRequest, res: NextApiResponse<Response>) {
-  try {
-    const item = JSON.parse(req.body) as TodoItem;
-    const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME);
-    const inserted = await itemsCollection.insertOne(item);
-    res.status(200).json({ result: [inserted] });
-  } catch (err) {
-    const error = err as Error;
-    res.status(500).json({ error: error.message });
-  }
+  // TODO: Implement me
 }
