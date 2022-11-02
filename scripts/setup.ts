@@ -1,6 +1,5 @@
 import { Tigris } from '@tigrisdata/core';
 import { loadEnvConfig } from '@next/env';
-import path from 'path';
 
 // Run the config loader only when not executing within next runtime
 if (process.env.NODE_ENV === undefined) {
