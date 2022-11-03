@@ -22,8 +22,6 @@ https://papaya-tartufo-d3a411.netlify.app/
 
 # ⚙️ Deploying the app
 You have two options to run this Next.js app:
-<details>
-<summary>1. Deploy on Netlify using Tigris Cloud (Recommended)</summary>
 
 ## 📖 Netlify & Tigris Cloud (Recommended)
 ### Prerequisites
@@ -44,7 +42,7 @@ or do a [code walkthrough](#code-walkthrough) next 🎉
 </details>
 
 <details>
-<summary>2. Running Next.js server & Tigris dev environment on your local computer</summary>
+<summary>Running Next.js server & Tigris dev environment on your local computer</summary>
 
 ## 📖 Running Next.js server & Tigris locally
 ### Prerequisites
