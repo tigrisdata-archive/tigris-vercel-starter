@@ -15,10 +15,10 @@ on [Netlify][Netlify-url].
 
 #### Project demo
 <a href="https://tigris-todo-starter.netlify.app/">
-    <img src="public/readme/todo_app_screenshot.jpg" alt="Todo web app">
+    <img src="public/readme/todo_app_screenshot.jpg" alt="Todo web app filled with a few tasks with some of the incomplete">
 </a>
 
-https://tigris-todo-starter.netlify.app/
+You can see the demo live at https://tigris-todo-starter.netlify.app/
 
 # ⚙️ Deploying the app
 You have two options to run this Next.js app:
@@ -31,7 +31,7 @@ You have two options to run this Next.js app:
 
 ### Instructions
 1. Login to [Tigris console](https://console.preview.tigrisdata.cloud/) and [follow the video instruction](https://docs.tigrisdata.com/auth/)
-   to register a new application. In the next step, we will use the generated `Client ID` and `Client Secret`
+   to register a new application under `My Settings > Application Keys`. In the next step, we will use the generated `Client ID` and `Client Secret`
    as [Environment Variables](.env.example) when deploying our Next.js app on Netlify.
 2. Hit "Deploy" and follow instructions to fork this repo and deploy app to your Netlify account
 
@@ -61,7 +61,13 @@ git clone https://github.com/tigrisdata/tigris-netlify-starter
 cd tigris-netlify-starter
 npm install
 ```
-3. Run the Next.js server
+3. Add the environment variables into a file `.env.development.local`
+```
+TIGRIS_URI="api.preview.tigrisdata.cloud"
+TIGRIS_CLIENT_ID="your client id"
+TIGRIS_CLIENT_SECRET="your client secret"
+```
+4. Run the Next.js server
 ```shell
 npm run dev
 ```
@@ -92,19 +98,19 @@ around or do a [code walkthrough](#code-walkthrough) next 🎉
 ```
 </details>
 
-<details>
-<summary> 🗄️ Tigris schema definition</summary>
+### 🗄️ Tigris schema definition
 
-[lib/schema.ts](lib/schema.ts) - The to-do list app has a single collection `todoItems` that stores the to-do items.
-</details>
+Inside of [lib/schema.ts](lib/schema.ts) you can find the defined structure 
+of the database. This to-do list app has a single collection `todoItems` 
+that stores the to-do items. When the setup script is ran, either 
+locally or in production, this will be scaffold for you on Tigris.
 
-<details>
-<summary> 🌐 Connecting to Tigris</summary>
+### 🌐 Connecting to Tigris
 
-[lib/tigris.ts](lib/tigris.ts) - Loads the environment variables you 
+The [lib/tigris.ts](lib/tigris.ts) file loads the environment variables you 
 specified previously in creating a Netlify project
-section and uses them to configure the Tigris client.
-</details>
+section and uses them to configure the Tigris client. Locally, you will want
+to make sure to create a `.env.development.local` file to store your environment variables. With Netlify, make sure to add them either on the site or through the CLI.
 
 <details>
 <summary> ❇️ API routes to access data in Tigris collection</summary>
@@ -127,7 +133,7 @@ All the Next.js API routes are defined under `pages/api/`. We have three files e
 # 🚀 Next steps
 In a few steps, we learnt how to bootstrap a Next.js app using Tigris and deploy it on Netlify. Feel
 free to add more functionalities or customize App for your use-case and learn more about
-[Tigris data platform](https://docs.tigrisdata.com/overview/)
+[Tigris data platform](https://docs.tigrisdata.com/overview/).
 
 # 🤝 Contributing
 Contributions are what make the open source community such an amazing place to learn, inspire, and create.
