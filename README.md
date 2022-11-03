@@ -14,11 +14,11 @@ using [TypeScript client](https://docs.tigrisdata.com/typescript/), deployed
 on [Netlify][Netlify-url].
 
 #### Project demo
-<a href="https://papaya-tartufo-d3a411.netlify.app/">
+<a href="https://tigris-todo-starter.netlify.app/">
     <img src="public/readme/todo_app_screenshot.jpg" alt="Todo web app">
 </a>
 
-https://papaya-tartufo-d3a411.netlify.app/
+https://tigris-todo-starter.netlify.app/
 
 # ⚙️ Deploying the app
 You have two options to run this Next.js app:
