@@ -55,7 +55,11 @@ git clone https://github.com/tigrisdata/tigris-vercel-starter
 cd tigris-vercel-starter
 npm install
 ```
-3. Run the Next.js server
+3. Start Tigris local development environment
+```shell
+tigris dev start
+```
+4. Run the Next.js server
 ```shell
 npm run dev
 ```
