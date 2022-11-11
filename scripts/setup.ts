@@ -12,7 +12,7 @@ if (process.env.NODE_ENV === undefined) {
 
 async function main() {
   console.log(`Vercel env: ${process.env.VERCEL_ENV}`);
-  console.log(`Vercel branch: ${process.env.VERCEL_GIT_REF}`);
+  console.log(`Vercel branch: ${process.env.VERCEL_GIT_COMMIT_REF}`);
   // setup client and register schemas
   const tigrisClient = new Tigris();
   await tigrisClient.registerSchemas('models/tigris');
