@@ -4,7 +4,7 @@ import Head from 'next/head'
 import React, { useEffect, useState } from 'react'
 import EachTodo from '../components/LoaderWave/EachToDo'
 import LoaderWave from '../components/LoaderWave/LoaderWave'
-import { TodoItem } from '../lib/schema'
+import { TodoItem } from '../models/tigris/tigris_netlify_starter/todoItems'
 import styles from '../styles/Home.module.css'
 
 const Home: NextPage = () => {
@@ -21,16 +21,16 @@ const Home: NextPage = () => {
 
   // Fetch Todo List
   const fetchListItems = ()=>{
-    
+
     setIsLoading(true);
     setIsError(false);
 
     fetch("/api/items")
     .then(response => response.json())
-    .then(data => 
+    .then(data =>
       {
         setIsLoading(false)
-        if(data.result){  
+        if(data.result){
           setViewMode('list')
           setTodoList(data.result)
         }
@@ -51,7 +51,7 @@ const Home: NextPage = () => {
     fetchListItems()
   },[]);
 
-  
+
   // Add a new todo-item
   const addToDoItem = () => {
 
@@ -64,7 +64,7 @@ const Home: NextPage = () => {
       method:'POST',
       body:JSON.stringify({text:querySearch, completed:false})
     })
-    .then(() => 
+    .then(() =>
       {
         setIsLoading(false);
         setQuerySearch('');
@@ -83,7 +83,7 @@ const Home: NextPage = () => {
     fetch("/api/item/"+id, {
       method:'DELETE',
     })
-    .then(() => 
+    .then(() =>
       {
         setIsLoading(false);
         if(viewMode == 'list'){
@@ -103,13 +103,13 @@ const Home: NextPage = () => {
 
     item.completed = !item.completed;
     setIsLoading(true);
-  
+
     fetch("/api/item/"+item.id, {
       method:'PUT',
       body:JSON.stringify(item)
     })
-    
-    .then(() => 
+
+    .then(() =>
       {
         setIsLoading(false);
         if(viewMode == 'list'){
@@ -118,7 +118,7 @@ const Home: NextPage = () => {
         else{
           searchQuery();
         }
-        
+
       }
     )
 
@@ -138,10 +138,10 @@ const Home: NextPage = () => {
       method:'GET',
     })
     .then(response => response.json())
-    .then((data) => 
+    .then((data) =>
       {
         setIsLoading(false);
-        if(data.result){ 
+        if(data.result){
           setViewMode('search')
           setTodoList(data.result)
         }
@@ -164,27 +164,27 @@ const Home: NextPage = () => {
 
   useEffect(()=>{
     if(!wiggleError){
-      return; 
+      return;
     }
     const timeOut = setTimeout(()=>{
       setWiggleError(false);
     },500)
 
     return () => clearTimeout(timeOut);
-    
+
   },[wiggleError])
 
 
-  
+
   return (
     <div>
       <Head>
         <title>Todo App using Next.js + Tigris</title>
         <meta name="description" content="Tigris app tutorial" />
       </Head>
-      
+
       <div className={styles.container}>
-        
+
         <h2>Sample Todo app using Next.js and Tigris</h2>
 
         {/* Search Header */}
@@ -196,7 +196,7 @@ const Home: NextPage = () => {
 
         {/* Results section */}
         <div className={styles.results}>
-         
+
           {/* Loader, Errors and Back to List mode */}
           {isError && <p className={styles.errorText}>Something went wrong.. </p>}
           {isLoading && <LoaderWave/>}
@@ -210,17 +210,16 @@ const Home: NextPage = () => {
               })}
             </ul>)
           }
-  
-            
+
+
         </div>
 
         <a href="https://tigrisdata.com/"><Image src="/tigris_logo.svg" alt="Tigris Logo" width={100} height={100}/></a>
 
       </div>
-       
+
     </div>
   )
 }
 
 export default Home
- 

@@ -3,7 +3,6 @@ import {
   TigrisDataTypes, TigrisSchema
 } from '@tigrisdata/core/dist/types'
 
-export const DB_NAME = 'tigris_netlify_starter'
 export const COLLECTION_NAME = 'todoItems'
 
 export interface TodoItem extends TigrisCollectionType {

@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { COLLECTION_NAME, TodoItem } from '../../../lib/schema'
+import { COLLECTION_NAME, TodoItem } from '../../../models/tigris/tigris_netlify_starter/todoItems'
 import { SearchRequest } from '@tigrisdata/core/dist/search/types'
 import { Collection } from '@tigrisdata/core'
 import tigrisDb from '../../../lib/tigris'

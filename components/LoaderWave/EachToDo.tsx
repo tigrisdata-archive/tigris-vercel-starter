@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import React from 'react';
-import { TodoItem } from '../../lib/schema';
+import { TodoItem } from '../../models/tigris/tigris_netlify_starter/todoItems';
 import styles from '../../styles/EachToDo.module.css';
 
 
@@ -23,7 +23,7 @@ const EachTodo = ({toDoItem, deleteHandler, updateHandler}:Props) => {
             <Image src='/delete.svg' width={24} height={24} alt='Check Image' />
         </button>
     </li>
-    
+
     </>
     );
 }

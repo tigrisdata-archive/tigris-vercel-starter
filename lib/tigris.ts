@@ -1,19 +1,6 @@
-import { DB, Tigris, TigrisClientConfig } from '@tigrisdata/core'
-import { DB_NAME } from './schema'
+import { DB, Tigris } from '@tigrisdata/core'
 
-if (!process.env.TIGRIS_URI) {
-  throw new Error('Cannot find TIGRIS_URI environment variable ')
-}
-
-const tigrisUri = process.env.TIGRIS_URI
-const clientConfig: TigrisClientConfig = { serverUrl: tigrisUri }
-
-if (process.env.TIGRIS_CLIENT_ID) {
-  clientConfig.clientId = process.env.TIGRIS_CLIENT_ID
-}
-if (process.env.TIGRIS_CLIENT_SECRET) {
-  clientConfig.clientSecret = process.env.TIGRIS_CLIENT_SECRET
-}
+export const DB_NAME = 'tigris_netlify_starter'
 
 declare global {
   // eslint-disable-next-line no-var
@@ -22,14 +9,18 @@ declare global {
 
 let tigrisDb: DB
 
-if (process.env.NODE_ENV === 'production') {
+// Caching the client because `next dev` would otherwise create a
+// new connection on every file save while previous connection is active due to
+// hot reloading. However, in production, Next.js would completely tear down before
+// restarting, thus, disconnecting and reconnecting to Tigris.
+if (process.env.NODE_ENV !== 'production') {
   if (!global.tigrisDb) {
-    const tigrisClient = new Tigris(clientConfig)
+    const tigrisClient = new Tigris()
     global.tigrisDb = tigrisClient.getDatabase(DB_NAME)
   }
   tigrisDb = global.tigrisDb
 } else {
-  const tigrisClient = new Tigris(clientConfig)
+  const tigrisClient = new Tigris()
   tigrisDb = tigrisClient.getDatabase(DB_NAME)
 }
 

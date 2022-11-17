@@ -84,8 +84,11 @@ around or do a [code walkthrough](#code-walkthrough) next 🎉
 
 ```shell
 ├── package.json
+├── models
+│   └── tigris
+│       └── tigris_netlify_starter
+│           └── todoItems.ts
 ├── lib
-│   ├── schema.ts
 │   ├── tigris.ts
 └── pages
     ├── index.tsx
@@ -100,10 +103,13 @@ around or do a [code walkthrough](#code-walkthrough) next 🎉
 
 ### 🗄️ Tigris schema definition
 
-Inside of [lib/schema.ts](lib/schema.ts) you can find the defined structure 
-of the database. This to-do list app has a single collection `todoItems` 
-that stores the to-do items. When the setup script is ran, either 
-locally or in production, this will be scaffold for you on Tigris.
+The to-do list app  has a single collection `todoItems` defined in [models/tigris/tigris_netlify_starter/todoItems.ts](models/tigris/tigris_netlify_starter/todoItems.ts)
+that stores the to-do items in `todoStarterApp` database. The
+Database and Collection get automatically provisioned by the [setup script](scripts/setup.ts).
+
+This is an inspiration from Next.js based file system router. Create a folder or drop a schema file
+inside database folder under `models/tigris/`, and you're able to instantly create Databases and
+Collections in Tigris for your application.
 
 ### 🌐 Connecting to Tigris
 
@@ -154,7 +160,7 @@ Thanks again!
 <!-- MARKDOWN LINKS & IMAGES -->
 [TypeScript]: https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white
 [TypeScript-url]: https://www.typescriptlang.org/
-[Netlify]: public/readme/full-logo-dark.svg
+[Netlify]: https://img.shields.io/badge/netlify-%F22F45.svg?style=for-the-badge&logo=netlify&logoColor=#00C7B7
 [Netlify-url]: https://www.netlify.com/
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
