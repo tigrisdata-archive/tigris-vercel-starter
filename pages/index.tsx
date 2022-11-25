@@ -1,29 +1,34 @@
-import type { NextPage } from 'next';
+import type { GetServerSideProps, NextPage } from 'next';
 import Image from 'next/image';
 import Head from 'next/head';
-import React, { useEffect, useState } from 'react';
+import { useState } from 'react';
 import EachTodo from '../components/EachToDo';
 import LoaderWave from '../components/LoaderWave';
-import { TodoItem } from '../models/tigris/todoStarterApp/todoItems';
+import { COLLECTION_NAME, TodoItem } from '../models/tigris/todoStarterApp/todoItems';
 import styles from '../styles/Home.module.css';
+import tigrisDb from '../lib/tigris';
 
-const Home: NextPage = () => {
+type Props = {
+  items: Array<TodoItem>;
+};
+
+type FetchStatus = 'loading' | 'success' | 'error';
+type TodoViewMode = 'list' | 'search';
+
+const Home: NextPage<Props> = ({ items }) => {
   // This is the input field
   const [textInput, setTextInput] = useState('');
 
   // Todo list array which displays the todo items
-  const [todoList, setTodoList] = useState<TodoItem[]>([]);
+  const [todoList, setTodoList] = useState<TodoItem[]>(items);
 
-  // Loading and Error flags for the template
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState(false);
+  const [fetchStatus, setFetchStatus] = useState<FetchStatus>('success');
 
   // This is use to animate the input text field
   const [wiggleError, setWiggleError] = useState(false);
 
   // Two separate views. 1. List view for todo items & 2. Search result view
-  type viewModeType = 'list' | 'search';
-  const [viewMode, setViewMode] = useState<viewModeType>('list');
+  const [viewMode, setViewMode] = useState<TodoViewMode>('list');
 
   // Fetch Todo List
   /*
@@ -33,30 +38,23 @@ const Home: NextPage = () => {
    If the 'result' key is present we safely set the 'todoList'.
   */
   const fetchListItems = () => {
-    setIsLoading(true);
-    setIsError(false);
+    setFetchStatus('loading');
 
     fetch('/api/items')
       .then(response => response.json())
       .then(data => {
-        setIsLoading(false);
+        setFetchStatus('success');
         if (data.result) {
           setViewMode('list');
           setTodoList(data.result);
         } else {
-          setIsError(true);
+          setFetchStatus('error');
         }
       })
       .catch(() => {
-        setIsLoading(false);
-        setIsError(true);
+        setFetchStatus('error');
       });
   };
-
-  // Load the initial list of todo-items
-  useEffect(() => {
-    fetchListItems();
-  }, []);
 
   // Add a new todo-item
   /*
@@ -67,13 +65,13 @@ const Home: NextPage = () => {
     if (queryCheckWiggle()) {
       return;
     }
-    setIsLoading(true);
+    setFetchStatus('loading');
 
     fetch('/api/items', {
       method: 'POST',
       body: JSON.stringify({ text: textInput, completed: false })
     }).then(() => {
-      setIsLoading(false);
+      setFetchStatus('success');
       setTextInput('');
       fetchListItems();
     });
@@ -85,12 +83,12 @@ const Home: NextPage = () => {
   It calls the endpoint 'api/item/<id>' with the 'DELETE' method. Read the method 'handleDelete' under pages/api/item/[id]' to learn more how the api handles deletion.
   */
   const deleteTodoItem = (id?: number) => {
-    setIsLoading(true);
+    setFetchStatus('loading');
 
     fetch('/api/item/' + id, {
       method: 'DELETE'
     }).then(() => {
-      setIsLoading(false);
+      setFetchStatus('success');
       if (viewMode == 'list') {
         fetchListItems();
       } else {
@@ -106,13 +104,13 @@ const Home: NextPage = () => {
   */
   const updateTodoItem = (item: TodoItem) => {
     item.completed = !item.completed;
-    setIsLoading(true);
+    setFetchStatus('loading');
 
     fetch('/api/item/' + item.id, {
       method: 'PUT',
       body: JSON.stringify(item)
     }).then(() => {
-      setIsLoading(false);
+      setFetchStatus('success');
       if (viewMode == 'list') {
         fetchListItems();
       } else {
@@ -130,19 +128,28 @@ const Home: NextPage = () => {
     if (queryCheckWiggle()) {
       return;
     }
-    setIsLoading(true);
+    setFetchStatus('loading');
 
     fetch(`/api/items/search?q=${encodeURI(textInput)}`, {
       method: 'GET'
     })
       .then(response => response.json())
       .then(data => {
-        setIsLoading(false);
+        setFetchStatus('success');
         if (data.result) {
           setViewMode('search');
           setTodoList(data.result);
         }
       });
+  };
+
+  const setHasError = (hasError: boolean) => {
+    setWiggleError(hasError);
+    if (hasError) {
+      setTimeout(() => {
+        setWiggleError(false);
+      }, 500);
+    }
   };
 
   // Util search query/input check
@@ -153,22 +160,11 @@ const Home: NextPage = () => {
   const queryCheckWiggle = () => {
     const result: RegExpMatchArray | null = textInput.match('^\\S.{0,100}$');
     if (result === null) {
-      setWiggleError(true);
+      setHasError(true);
       return true;
     }
     return false;
   };
-
-  useEffect(() => {
-    if (!wiggleError) {
-      return;
-    }
-    const timeOut = setTimeout(() => {
-      setWiggleError(false);
-    }, 500);
-
-    return () => clearTimeout(timeOut);
-  }, [wiggleError]);
 
   return (
     <div>
@@ -198,8 +194,8 @@ const Home: NextPage = () => {
         {/* Results section */}
         <div className={styles.results}>
           {/* Loader, Errors and Back to List mode */}
-          {isError && <p className={styles.errorText}>Something went wrong.. </p>}
-          {isLoading && <LoaderWave />}
+          {fetchStatus === 'error' && <p className={styles.errorText}>Something went wrong.. </p>}
+          {fetchStatus === 'loading' && <LoaderWave />}
           {viewMode == 'search' && (
             <button
               className={styles.clearSearch}
@@ -239,6 +235,15 @@ const Home: NextPage = () => {
       </div>
     </div>
   );
+};
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const itemsCollection = tigrisDb.getCollection<TodoItem>(COLLECTION_NAME);
+  const cursor = itemsCollection.findMany();
+  const items = await cursor.toArray();
+  return {
+    props: { items }
+  };
 };
 
 export default Home;
