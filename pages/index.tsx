@@ -4,7 +4,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import EachTodo from '../components/EachToDo';
 import LoaderWave from '../components/LoaderWave';
-import { ITEMS_COLLECTION_NAME, TodoItem } from '../models/tigris/todoItems';
+import { TodoItem } from '../db/models/todoItems';
 import styles from '../styles/Home.module.css';
 import tigrisDb from '../lib/tigris';
 
@@ -238,7 +238,7 @@ const Home: NextPage<Props> = ({ items }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const itemsCollection = tigrisDb.getCollection<TodoItem>(ITEMS_COLLECTION_NAME);
+  const itemsCollection = tigrisDb.getCollection<TodoItem>(TodoItem);
   const cursor = itemsCollection.findMany();
   const items = await cursor.toArray();
   return {
