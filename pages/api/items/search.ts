@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { COLLECTION_NAME, TodoItem } from '../../../models/tigris/todoStarterApp/todoItems';
-import { SearchRequest } from '@tigrisdata/core/dist/search/types';
+import { ITEMS_COLLECTION_NAME, TodoItem } from '../../../models/tigris/todoItems';
+import { SearchRequest } from '@tigrisdata/core';
 import tigrisDb from '../../../lib/tigris';
 
 type Data = {

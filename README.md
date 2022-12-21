@@ -7,7 +7,7 @@
 
 # ⚡ ️Tigris example app on Next.js - Todo list
 
-A simple todo app built on [Next.js][Next-url] and [Tigris](https://docs.tigrisdata.com/) 
+A simple todo app built on [Next.js][Next-url] and [Tigris](https://docs.tigrisdata.com/)
 using [TypeScript client](https://docs.tigrisdata.com/typescript/), deployed on [Vercel][Vercel-url].
 
 #### Project demo
@@ -55,13 +55,17 @@ git clone https://github.com/tigrisdata/tigris-vercel-starter
 cd tigris-vercel-starter
 npm install
 ```
-3. Run the Next.js server
+3. Start Tigris local development environment
+```shell
+tigris dev start
+```
+4. Run the Next.js server
 ```shell
 npm run dev
 ```
->Note: This step will also initialize Tigris database and collection for app.
+>Note: This step will also initialize Tigris project and collections for app.
 
-:tada: All done. You should be able to use app on `localhost:3000` in browser. Feel free to play 
+:tada: All done. You should be able to use app on `localhost:3000` in browser. Feel free to play
 around or do a [code walk-through](#code-walkthrough) next :tada:
 </details>
 
@@ -76,8 +80,7 @@ around or do a [code walk-through](#code-walkthrough) next :tada:
 │   ├── tigris.ts
 ├── models
 │   └── tigris
-│       └── todoStarterApp
-│           └── todoItems.ts
+│       └── todoItems.ts
 └── pages
     ├── index.tsx
     └── api
@@ -92,13 +95,9 @@ around or do a [code walk-through](#code-walkthrough) next :tada:
 <details>
 <summary> 🪢 Tigris schema definition</summary>
 
-[models/tigris/todoStarterApp/todoItems.ts](models/tigris/todoStarterApp/todoItems.ts) - The to-do list app 
-has a single collection `todoItems` that stores the to-do items in `todoStarterApp` database. The
-Database and Collection get automatically provisioned by the [setup script](scripts/setup.ts).
-    
-This is an inspiration from Next.js based file system router. Create a folder or drop a schema file 
-inside database folder under `models/tigris/`, and you're able to instantly create Databases and 
-Collections in Tigris for your application.
+[models/tigris/todoItems.ts](models/tigris/todoItems.ts) - The to-do list app has a single collection
+`todoItems` that stores the to-do items. The Project and Collection get automatically created by the
+[setup script](scripts/setup.ts).
 </details>
 
 <details>
@@ -111,7 +110,7 @@ section and uses them to configure the Tigris client.
 <details>
 <summary> ❇️ API routes to access data in Tigris collection</summary>
 
-All the Next.js API routes are defined under `pages/api/`. We have three files exposing endpoints: 
+All the Next.js API routes are defined under `pages/api/`. We have three files exposing endpoints:
 
 #### [`pages/api/items/index.ts`](pages/api/items/index.ts)
 
@@ -133,16 +132,16 @@ All the Next.js API routes are defined under `pages/api/`. We have three files e
 # 🚀 Next steps
 
 In a few steps, we learnt how to bootstrap a Next.js app using Tigris and deploy it on Vercel. Feel
-free to add more functionalities or customize App for your use-case and learn more about 
-[Tigris data platform](https://docs.tigrisdata.com/overview/) 
+free to add more functionalities or customize App for your use-case and learn more about
+[Tigris data platform](https://docs.tigrisdata.com/overview/)
 
 # 🤝 Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create.
 Any contributions you make are **greatly appreciated**.
 
-If you have a suggestion that would make this better, please fork the repo and create a pull request. 
-You can also simply open an issue. Don't forget to give the project a star! 
+If you have a suggestion that would make this better, please fork the repo and create a pull request.
+You can also simply open an issue. Don't forget to give the project a star!
 Thanks again!
 
 1. Fork the Project

@@ -1,5 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
-import { COLLECTION_NAME, TodoItem } from '../../../models/tigris/todoStarterApp/todoItems';
+import { ITEMS_COLLECTION_NAME, TodoItem } from '../../../models/tigris/todoItems';
 import tigrisDb from '../../../lib/tigris';
 
 type Response = {
