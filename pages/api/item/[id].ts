@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { ITEMS_COLLECTION_NAME, TodoItem } from '../../../models/tigris/todoItems';
+import { TodoItem } from '../../../models/tigris/todoItems';
 import tigrisDb from '../../../lib/tigris';
 
 type Data = {
@@ -30,8 +30,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
 async function handleGet(req: NextApiRequest, res: NextApiResponse<Data>, itemId: number) {
   try {
-    const itemsCollection = tigrisDb.getCollection<TodoItem>(ITEMS_COLLECTION_NAME);
-    const item = await itemsCollection.findOne({ id: itemId });
+    const itemsCollection = tigrisDb.getCollection<TodoItem>(TodoItem);
+    const item = await itemsCollection.findOne({ filter: { id: itemId } });
     if (!item) {
       res.status(404).json({ error: 'No item found' });
     } else {
