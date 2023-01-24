@@ -25,6 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
 async function handleGet(req: NextApiRequest, res: NextApiResponse<Response>) {
   try {
+    console.log(`Recieved branch var in GET: ${process.env.TIGRIS_DB_BRANCH}`);
     const itemsCollection = tigrisDb.getCollection<TodoItem>(TodoItem);
     const cursor = itemsCollection.findMany();
     const items = await cursor.toArray();

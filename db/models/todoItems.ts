@@ -1,4 +1,4 @@
-import { Field, PrimaryKey, TigrisCollection, TigrisCollectionType, TigrisDataTypes } from '@tigrisdata/core';
+import { Field, PrimaryKey, TigrisCollection, TigrisDataTypes } from '@tigrisdata/core';
 
 @TigrisCollection('todoItems')
 export class TodoItem {
