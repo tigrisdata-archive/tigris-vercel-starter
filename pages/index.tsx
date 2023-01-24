@@ -238,6 +238,7 @@ const Home: NextPage<Props> = ({ items }) => {
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  console.log(`ssr branch env var: ${process.env.TIGRIS_DB_BRANCH}`);
   const itemsCollection = tigrisDb.getCollection<TodoItem>(TodoItem);
   const cursor = itemsCollection.findMany();
   const items = await cursor.toArray();
