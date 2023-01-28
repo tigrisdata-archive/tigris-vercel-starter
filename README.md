@@ -5,10 +5,25 @@
 [![Vercel][Vercel]][Vercel-url]
 [![Apache License][license-shield]][license-url]
 
-# ⚡ ️Tigris example app on Next.js - Todo list
+# ⚡ Tigris and Next.js starter template
 
-A simple todo app built on [Next.js][Next-url] and [Tigris](https://docs.tigrisdata.com/) 
-using [TypeScript client](https://docs.tigrisdata.com/typescript/), deployed on [Vercel][Vercel-url].
+Tigris is a fully-managed developer data platform that offers a suite of 
+databases and data services with a code-first approach, empowering you to 
+build responsive applications without the hassle of infrastructure 
+management and scaling complexities.
+
+* **Database**: A fully-managed, serverless document database designed to 
+  run applications at any scale. Offers native support for global 
+  transactions, high availability, fault tolerance, data security and 
+  database branching.
+* **Search**: A unified, fully-managed platform that combines database, 
+  full-text search and sync mechanism providing the easiest way 
+  to build search capabilities into applications.
+
+To learn more about Tigris, see [tigrisdata.com][tigris-url].
+
+This template creates a simple todo app built on [Next.js][Next-url] and 
+[Tigris][tigris-url] and deployed on [Vercel][Vercel-url].
 
 #### Project demo
 
@@ -21,7 +36,7 @@ https://tigris-nextjs-starter-kit.vercel.app/
 # ⚙️ Deploying the app
 
 All you need is a [Github](https://github.com), [Vercel][Vercel-url] and Tigris
-account([sign up for a free account](https://www.tigrisdata.com/nextjs#signup-form)). Now, Hit "Deploy"
+account([sign up for a free account][signup-url]). Now, Hit "Deploy"
 and follow instructions to deploy app to your Vercel account
 
 [![Deploy with Vercel](https://vercel.com/button)][Deploy-url]
@@ -131,9 +146,10 @@ All the Next.js API routes are defined under `pages/api/`. We have three files e
 
 # 🚀 Next steps
 
-In a few steps, we learnt how to bootstrap a Next.js app using Tigris and deploy it on Vercel. Feel
-free to add more functionalities or customize App for your use-case and learn more about 
-[Tigris data platform](https://docs.tigrisdata.com/overview/) 
+In a few steps, we learnt how to bootstrap a Next.js app using Tigris and 
+deploy it on Vercel. Feel free to add more functionalities or customize App 
+for your use-case and learn more about 
+[Tigris][tigris-url]. 
 
 # 🤝 Contributing
 
@@ -163,3 +179,5 @@ Thanks again!
 [Next-url]: https://nextjs.org/
 [license-shield]: https://img.shields.io/github/license/tigrisdata/tigris-vercel-starter.svg?style=for-the-badge
 [license-url]: LICENSE
+[tigris-url]: https://www.tigrisdata.com/
+[signup-url]: https://console.preview.tigrisdata.cloud/signup
