@@ -1,7 +1,7 @@
 <a name="readme-top"></a>
 
 <p align="center">
-  <a href="https://www.tigrisdata.com/"><img src="https://www.tigrisdata.com/docs/logo/dark.png" alt="Tigris" width="298" /></a> 
+  <a href="https://www.tigrisdata.com/"><img src="https://www.tigrisdata.com/docs/logo/dark.png" alt="Tigris" width="320" /></a> 
 </p>
 
 <p align="center">
