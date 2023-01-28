@@ -1,11 +1,28 @@
 <a name="readme-top"></a>
 
+<p align="center">
+  <a href="https://www.tigrisdata.com/"><img src="https://www.tigrisdata.com/docs/logo/dark.png" alt="Tigris" width="298" /></a> 
+</p>
+
+<p align="center">
+Tigris is the all-in-one open source developer data platform. 
+</p>
+
+<p align="center">
+Use it as a
+scalable transactional document store. Perform real-time search across your
+data stores automatically. Build event-driven apps with real-time event
+streaming. All provided to you through a unified serverless API enabling you
+to focus on building applications and stop worrying about the data
+infrastructure.
+</p>
+
+# ⚡ ️Next.js example app using Tigris - Todo list
+
 [![Next][Next.js]][Next-url]
 [![TypeScript][TypeScript]][TypeScript-url]
 [![Vercel][Vercel]][Vercel-url]
 [![Apache License][license-shield]][license-url]
-
-# ⚡ ️Tigris example app on Next.js - Todo list
 
 A simple todo app built on [Next.js][Next-url] and [Tigris](https://docs.tigrisdata.com/) 
 using [TypeScript client](https://docs.tigrisdata.com/typescript/), deployed on [Vercel][Vercel-url].
