@@ -1,4 +1,11 @@
-import { Field, PrimaryKey, TigrisCollection, TigrisCollectionType, TigrisDataTypes } from '@tigrisdata/core';
+import {
+  Field,
+  PrimaryKey,
+  SearchField,
+  TigrisCollection,
+  TigrisCollectionType,
+  TigrisDataTypes
+} from '@tigrisdata/core';
 
 @TigrisCollection('todoItems')
 export class TodoItem implements TigrisCollectionType {
@@ -6,6 +13,7 @@ export class TodoItem implements TigrisCollectionType {
   id!: number;
 
   @Field()
+  @SearchField()
   text!: string;
 
   @Field()
